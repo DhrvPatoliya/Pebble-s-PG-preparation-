@@ -1,25 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	<title></title>
-	<meta name="generator" content="LibreOffice 26.2.3.2 (Linux)"/>
-	<meta name="created" content="00:00:00"/>
-	<meta name="changed" content="00:00:00"/>
-	<style type="text/css">
-		@page { size: 8.27in 11.69in; margin: 0.79in }
-		p { margin-bottom: 0.1in; line-height: 115%; background: transparent }
-		pre { font-size: 10pt; font-family: "Liberation Mono", monospace; background: transparent }
-	</style>
-</head>
-<body lang="en-US" link="#000080" vlink="#800000" dir="ltr"><pre>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-&lt;meta charset=&quot;UTF-8&quot;&gt;
-&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-&lt;title&gt;NEET PG 2028 — Study Command Centre&lt;/title&gt;
-&lt;style&gt;
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEET PG 2028 — Study Command Centre</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
   :root {
     --bg: #0e0f13;
@@ -292,484 +278,485 @@
   .intro-banner h2 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
   .intro-banner p { font-size: 13px; color: var(--muted); }
   .intro-banner .quote { font-size: 12px; color: var(--accent2); margin-top: 8px; font-style: italic; }
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
+</style>
+</head>
+<body>
 
-&lt;nav&gt;
-  &lt;div class=&quot;nav-logo&quot;&gt;NEET PG &lt;span&gt;2028&lt;/span&gt;&lt;/div&gt;
-  &lt;div class=&quot;nav-tabs&quot;&gt;
-    &lt;button class=&quot;tab active&quot; onclick=&quot;showPage('daily')&quot;&gt;Daily&lt;/button&gt;
-    &lt;button class=&quot;tab&quot; onclick=&quot;showPage('weekly')&quot;&gt;Weekly&lt;/button&gt;
-    &lt;button class=&quot;tab&quot; onclick=&quot;showPage('tracker')&quot;&gt;Tracker&lt;/button&gt;
-    &lt;button class=&quot;tab&quot; onclick=&quot;showPage('gt')&quot;&gt;GT&lt;/button&gt;
-    &lt;button class=&quot;tab&quot; onclick=&quot;showPage('revision')&quot;&gt;Revision&lt;/button&gt;
-    &lt;button class=&quot;tab&quot; onclick=&quot;showPage('notion')&quot;&gt;📋 Notion&lt;/button&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;nav-date&quot; id=&quot;live-date&quot;&gt;&lt;/div&gt;
-&lt;/nav&gt;
+<nav>
+  <div class="nav-logo">NEET PG <span>2028</span></div>
+  <div class="nav-tabs">
+    <button class="tab active" onclick="showPage('daily')">Daily</button>
+    <button class="tab" onclick="showPage('weekly')">Weekly</button>
+    <button class="tab" onclick="showPage('tracker')">Tracker</button>
+    <button class="tab" onclick="showPage('gt')">GT</button>
+    <button class="tab" onclick="showPage('revision')">Revision</button>
+    <button class="tab" onclick="showPage('notion')">📋 Notion</button>
+  </div>
+  <div class="nav-date" id="live-date"></div>
+</nav>
 
-&lt;!-- ══════════════════ DAILY PAGE ══════════════════ --&gt;
-&lt;div class=&quot;page active&quot; id=&quot;page-daily&quot;&gt;
+<!-- ══════════════════ DAILY PAGE ══════════════════ -->
+<div class="page active" id="page-daily">
 
-  &lt;div class=&quot;intro-banner&quot;&gt;
-    &lt;h2&gt;🧠 Daily Command Centre&lt;/h2&gt;
-    &lt;p&gt;3 Medicine lectures · 50 MCQs · Spaced Revision · 7 hrs deep work&lt;/p&gt;
-    &lt;div class=&quot;quote&quot;&gt;&quot;Small daily improvements are the key to staggering long-term results.&quot;&lt;/div&gt;
-  &lt;/div&gt;
+  <div class="intro-banner">
+    <h2>🧠 Daily Command Centre</h2>
+    <p>3 Medicine lectures · 50 MCQs · Spaced Revision · 7 hrs deep work</p>
+    <div class="quote">"Small daily improvements are the key to staggering long-term results."</div>
+  </div>
 
-  &lt;div class=&quot;stat-row&quot;&gt;
-    &lt;div class=&quot;stat green&quot;&gt;
-      &lt;div class=&quot;stat-val&quot; id=&quot;streak-count&quot;&gt;0&lt;/div&gt;
-      &lt;div class=&quot;stat-label&quot;&gt;🔥 Day Streak&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;stat purple&quot;&gt;
-      &lt;div class=&quot;stat-val&quot; id=&quot;tasks-done&quot;&gt;0/8&lt;/div&gt;
-      &lt;div class=&quot;stat-label&quot;&gt;Tasks Today&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;stat yellow&quot;&gt;
-      &lt;div class=&quot;stat-val&quot;&gt;171&lt;/div&gt;
-      &lt;div class=&quot;stat-label&quot;&gt;Med Lectures Left&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;stat blue&quot;&gt;
-      &lt;div class=&quot;stat-val&quot; id=&quot;med-done&quot;&gt;0&lt;/div&gt;
-      &lt;div class=&quot;stat-label&quot;&gt;Med Done Total&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;stat teal&quot;&gt;
-      &lt;div class=&quot;stat-val&quot; id=&quot;mcq-total&quot;&gt;0&lt;/div&gt;
-      &lt;div class=&quot;stat-label&quot;&gt;MCQs Logged&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+  <div class="stat-row">
+    <div class="stat green">
+      <div class="stat-val" id="streak-count">0</div>
+      <div class="stat-label">🔥 Day Streak</div>
+    </div>
+    <div class="stat purple">
+      <div class="stat-val" id="tasks-done">0/8</div>
+      <div class="stat-label">Tasks Today</div>
+    </div>
+    <div class="stat yellow">
+      <div class="stat-val">171</div>
+      <div class="stat-label">Med Lectures Left</div>
+    </div>
+    <div class="stat blue">
+      <div class="stat-val" id="med-done">0</div>
+      <div class="stat-label">Med Done Total</div>
+    </div>
+    <div class="stat teal">
+      <div class="stat-val" id="mcq-total">0</div>
+      <div class="stat-label">MCQs Logged</div>
+    </div>
+  </div>
 
-  &lt;!-- Timer --&gt;
-  &lt;div class=&quot;grid-2&quot; style=&quot;margin-bottom:16px&quot;&gt;
-    &lt;div class=&quot;card&quot;&gt;
-      &lt;div class=&quot;card-title&quot;&gt;⏱ Deep Work Timer&lt;/div&gt;
-      &lt;div class=&quot;timer-display&quot; id=&quot;timer&quot;&gt;25:00&lt;/div&gt;
-      &lt;div class=&quot;timer-btns&quot;&gt;
-        &lt;button class=&quot;btn btn-primary&quot; onclick=&quot;startTimer()&quot;&gt;Start&lt;/button&gt;
-        &lt;button class=&quot;btn btn-outline&quot; onclick=&quot;pauseTimer()&quot;&gt;Pause&lt;/button&gt;
-        &lt;button class=&quot;btn btn-outline&quot; onclick=&quot;resetTimer()&quot;&gt;Reset&lt;/button&gt;
-      &lt;/div&gt;
-      &lt;div style=&quot;display:flex;gap:8px;justify-content:center;margin-top:12px&quot;&gt;
-        &lt;button class=&quot;btn btn-outline&quot; style=&quot;font-size:11px;padding:6px 12px&quot; onclick=&quot;setTimer(25)&quot;&gt;25m Focus&lt;/button&gt;
-        &lt;button class=&quot;btn btn-outline&quot; style=&quot;font-size:11px;padding:6px 12px&quot; onclick=&quot;setTimer(50)&quot;&gt;50m Deep&lt;/button&gt;
-        &lt;button class=&quot;btn btn-outline&quot; style=&quot;font-size:11px;padding:6px 12px&quot; onclick=&quot;setTimer(5)&quot;&gt;5m Break&lt;/button&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
+  <!-- Timer -->
+  <div class="grid-2" style="margin-bottom:16px">
+    <div class="card">
+      <div class="card-title">⏱ Deep Work Timer</div>
+      <div class="timer-display" id="timer">25:00</div>
+      <div class="timer-btns">
+        <button class="btn btn-primary" onclick="startTimer()">Start</button>
+        <button class="btn btn-outline" onclick="pauseTimer()">Pause</button>
+        <button class="btn btn-outline" onclick="resetTimer()">Reset</button>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:center;margin-top:12px">
+        <button class="btn btn-outline" style="font-size:11px;padding:6px 12px" onclick="setTimer(25)">25m Focus</button>
+        <button class="btn btn-outline" style="font-size:11px;padding:6px 12px" onclick="setTimer(50)">50m Deep</button>
+        <button class="btn btn-outline" style="font-size:11px;padding:6px 12px" onclick="setTimer(5)">5m Break</button>
+      </div>
+    </div>
 
-    &lt;!-- Streak visual --&gt;
-    &lt;div class=&quot;card&quot;&gt;
-      &lt;div class=&quot;card-title&quot;&gt;📅 Last 30 Days&lt;/div&gt;
-      &lt;div class=&quot;streak-grid&quot; id=&quot;streak-grid&quot;&gt;&lt;/div&gt;
-      &lt;div style=&quot;margin-top:14px;font-size:12px;color:var(--muted)&quot;&gt;
+    <!-- Streak visual -->
+    <div class="card">
+      <div class="card-title">📅 Last 30 Days</div>
+      <div class="streak-grid" id="streak-grid"></div>
+      <div style="margin-top:14px;font-size:12px;color:var(--muted)">
         Click a day to toggle. Purple = today, Violet = completed.
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+      </div>
+    </div>
+  </div>
 
-  &lt;!-- WEEKDAY CHECKLIST --&gt;
-  &lt;div class=&quot;card&quot; id=&quot;checklist-card&quot;&gt;
-    &lt;div class=&quot;flex-between&quot; style=&quot;margin-bottom:16px&quot;&gt;
-      &lt;div class=&quot;card-title&quot; style=&quot;margin-bottom:0&quot;&gt;☑ Today's Checklist &lt;span id=&quot;day-type&quot; class=&quot;chip chip-purple&quot;&gt;Weekday&lt;/span&gt;&lt;/div&gt;
-      &lt;button class=&quot;btn btn-outline&quot; style=&quot;font-size:11px;padding:6px 12px&quot; onclick=&quot;resetChecklist()&quot;&gt;Reset&lt;/button&gt;
-    &lt;/div&gt;
+  <!-- WEEKDAY CHECKLIST -->
+  <div class="card" id="checklist-card">
+    <div class="flex-between" style="margin-bottom:16px">
+      <div class="card-title" style="margin-bottom:0">☑ Today's Checklist <span id="day-type" class="chip chip-purple">Weekday</span></div>
+      <button class="btn btn-outline" style="font-size:11px;padding:6px 12px" onclick="resetChecklist()">Reset</button>
+    </div>
 
-    &lt;div id=&quot;checklist-weekday&quot;&gt;
-      &lt;ul class=&quot;checklist&quot; id=&quot;check-list&quot;&gt;
-        &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;📖 Medicine Lecture 1 — watch + notes&lt;/span&gt;&lt;span class=&quot;check-tag tag-must&quot;&gt;MUST&lt;/span&gt;&lt;/li&gt;
-        &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;📖 Medicine Lecture 2 — watch + notes&lt;/span&gt;&lt;span class=&quot;check-tag tag-must&quot;&gt;MUST&lt;/span&gt;&lt;/li&gt;
-        &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;📖 Medicine Lecture 3 — watch + notes&lt;/span&gt;&lt;span class=&quot;check-tag tag-must&quot;&gt;MUST&lt;/span&gt;&lt;/li&gt;
-        &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;🔁 Immediate revision after each lecture&lt;/span&gt;&lt;span class=&quot;check-tag tag-rev&quot;&gt;REVISION&lt;/span&gt;&lt;/li&gt;
-        &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;📚 Low-yield subject slot (today: see tracker)&lt;/span&gt;&lt;span class=&quot;check-tag tag-low&quot;&gt;LOW-YIELD&lt;/span&gt;&lt;/li&gt;
-        &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;❓ 50 MCQs — subject-wise or GT mode&lt;/span&gt;&lt;span class=&quot;check-tag tag-mcq&quot;&gt;MCQs&lt;/span&gt;&lt;/li&gt;
-        &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;📅 Spaced revision — check due topics&lt;/span&gt;&lt;span class=&quot;check-tag tag-rev&quot;&gt;SR&lt;/span&gt;&lt;/li&gt;
-        &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;❌ Wrong question notebook — update&lt;/span&gt;&lt;span class=&quot;check-tag tag-must&quot;&gt;LOG&lt;/span&gt;&lt;/li&gt;
-        &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;🪲 Error log — update mistakes + patterns&lt;/span&gt;&lt;span class=&quot;check-tag tag-must&quot;&gt;LOG&lt;/span&gt;&lt;/li&gt;
-        &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;📊 Progress tracker — update lecture count&lt;/span&gt;&lt;span class=&quot;check-tag tag-low&quot;&gt;TRACK&lt;/span&gt;&lt;/li&gt;
-      &lt;/ul&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+    <div id="checklist-weekday">
+      <ul class="checklist" id="check-list">
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📖 Medicine Lecture 1 — watch + notes</span><span class="check-tag tag-must">MUST</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📖 Medicine Lecture 2 — watch + notes</span><span class="check-tag tag-must">MUST</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📖 Medicine Lecture 3 — watch + notes</span><span class="check-tag tag-must">MUST</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">🔁 Immediate revision after each lecture</span><span class="check-tag tag-rev">REVISION</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📚 Low-yield subject slot (today: see tracker)</span><span class="check-tag tag-low">LOW-YIELD</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">❓ 50 MCQs — subject-wise or GT mode</span><span class="check-tag tag-mcq">MCQs</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📅 Spaced revision — check due topics</span><span class="check-tag tag-rev">SR</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">❌ Wrong question notebook — update</span><span class="check-tag tag-must">LOG</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">🪲 Error log — update mistakes + patterns</span><span class="check-tag tag-must">LOG</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📊 Progress tracker — update lecture count</span><span class="check-tag tag-low">TRACK</span></li>
+      </ul>
+    </div>
+  </div>
 
-  &lt;div class=&quot;card mt16&quot; id=&quot;sunday-card&quot; style=&quot;display:none&quot;&gt;
-    &lt;div class=&quot;card-title&quot;&gt;☀️ Sunday Checklist — No New Lectures&lt;/div&gt;
-    &lt;ul class=&quot;checklist&quot; id=&quot;sun-list&quot;&gt;
-      &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;❓ 50 MCQs — mixed previous topics&lt;/span&gt;&lt;span class=&quot;check-tag tag-mcq&quot;&gt;MCQs&lt;/span&gt;&lt;/li&gt;
-      &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;🔁 Weekly revision — all 5 completed subjects&lt;/span&gt;&lt;span class=&quot;check-tag tag-rev&quot;&gt;REVISION&lt;/span&gt;&lt;/li&gt;
-      &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;📅 Spaced repetition — all overdue cards&lt;/span&gt;&lt;span class=&quot;check-tag tag-rev&quot;&gt;SR&lt;/span&gt;&lt;/li&gt;
-      &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;❌ Wrong question notebook — full review&lt;/span&gt;&lt;span class=&quot;check-tag tag-must&quot;&gt;LOG&lt;/span&gt;&lt;/li&gt;
-      &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;📝 Weekly review — what worked, what didn't&lt;/span&gt;&lt;span class=&quot;check-tag tag-low&quot;&gt;REVIEW&lt;/span&gt;&lt;/li&gt;
-      &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;📆 Plan next week — schedule low-yield subjects&lt;/span&gt;&lt;span class=&quot;check-tag tag-low&quot;&gt;PLAN&lt;/span&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/div&gt;
+  <div class="card mt16" id="sunday-card" style="display:none">
+    <div class="card-title">☀️ Sunday Checklist — No New Lectures</div>
+    <ul class="checklist" id="sun-list">
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">❓ 50 MCQs — mixed previous topics</span><span class="check-tag tag-mcq">MCQs</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">🔁 Weekly revision — all 5 completed subjects</span><span class="check-tag tag-rev">REVISION</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📅 Spaced repetition — all overdue cards</span><span class="check-tag tag-rev">SR</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">❌ Wrong question notebook — full review</span><span class="check-tag tag-must">LOG</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📝 Weekly review — what worked, what didn't</span><span class="check-tag tag-low">REVIEW</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📆 Plan next week — schedule low-yield subjects</span><span class="check-tag tag-low">PLAN</span></li>
+    </ul>
+  </div>
 
-  &lt;!-- Habit Tracker --&gt;
-  &lt;div class=&quot;card mt16&quot;&gt;
-    &lt;div class=&quot;card-title&quot;&gt;🟣 Habit Tracker — This Week&lt;/div&gt;
-    &lt;div class=&quot;habit-row&quot; style=&quot;border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:4px&quot;&gt;
-      &lt;div class=&quot;habit-name&quot; style=&quot;color:var(--muted);font-size:11px;font-weight:600&quot;&gt;HABIT&lt;/div&gt;
-      &lt;div class=&quot;habit-days&quot; style=&quot;gap:6px&quot;&gt;
-        &lt;div class=&quot;hday&quot; style=&quot;background:none;border:none;font-size:10px;color:var(--muted)&quot;&gt;M&lt;/div&gt;
-        &lt;div class=&quot;hday&quot; style=&quot;background:none;border:none;font-size:10px;color:var(--muted)&quot;&gt;T&lt;/div&gt;
-        &lt;div class=&quot;hday&quot; style=&quot;background:none;border:none;font-size:10px;color:var(--muted)&quot;&gt;W&lt;/div&gt;
-        &lt;div class=&quot;hday&quot; style=&quot;background:none;border:none;font-size:10px;color:var(--muted)&quot;&gt;T&lt;/div&gt;
-        &lt;div class=&quot;hday&quot; style=&quot;background:none;border:none;font-size:10px;color:var(--muted)&quot;&gt;F&lt;/div&gt;
-        &lt;div class=&quot;hday&quot; style=&quot;background:none;border:none;font-size:10px;color:var(--muted)&quot;&gt;S&lt;/div&gt;
-        &lt;div class=&quot;hday&quot; style=&quot;background:none;border:none;font-size:10px;color:var(--muted)&quot;&gt;S&lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div id=&quot;habit-grid&quot;&gt;&lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
+  <!-- Habit Tracker -->
+  <div class="card mt16">
+    <div class="card-title">🟣 Habit Tracker — This Week</div>
+    <div class="habit-row" style="border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:4px">
+      <div class="habit-name" style="color:var(--muted);font-size:11px;font-weight:600">HABIT</div>
+      <div class="habit-days" style="gap:6px">
+        <div class="hday" style="background:none;border:none;font-size:10px;color:var(--muted)">M</div>
+        <div class="hday" style="background:none;border:none;font-size:10px;color:var(--muted)">T</div>
+        <div class="hday" style="background:none;border:none;font-size:10px;color:var(--muted)">W</div>
+        <div class="hday" style="background:none;border:none;font-size:10px;color:var(--muted)">T</div>
+        <div class="hday" style="background:none;border:none;font-size:10px;color:var(--muted)">F</div>
+        <div class="hday" style="background:none;border:none;font-size:10px;color:var(--muted)">S</div>
+        <div class="hday" style="background:none;border:none;font-size:10px;color:var(--muted)">S</div>
+      </div>
+    </div>
+    <div id="habit-grid"></div>
+  </div>
+</div>
 
-&lt;!-- ══════════════════ WEEKLY PAGE ══════════════════ --&gt;
-&lt;div class=&quot;page&quot; id=&quot;page-weekly&quot;&gt;
-  &lt;div class=&quot;card&quot; style=&quot;margin-bottom:16px&quot;&gt;
-    &lt;div class=&quot;card-title&quot;&gt;📆 Weekly Schedule Template&lt;/div&gt;
-    &lt;table class=&quot;tbl&quot;&gt;
-      &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Day&lt;/th&gt;&lt;th&gt;Focus Subject&lt;/th&gt;&lt;th&gt;Low-Yield&lt;/th&gt;&lt;th&gt;MCQs&lt;/th&gt;&lt;th&gt;Special&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
-      &lt;tbody&gt;
-        &lt;tr&gt;&lt;td&gt;&lt;b&gt;Monday&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge badge-prog&quot;&gt;3 Medicine&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Physiology&lt;/td&gt;&lt;td&gt;50&lt;/td&gt;&lt;td&gt;—&lt;/td&gt;&lt;/tr&gt;
-        &lt;tr&gt;&lt;td&gt;&lt;b&gt;Tuesday&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge badge-prog&quot;&gt;3 Medicine&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Dermatology&lt;/td&gt;&lt;td&gt;50&lt;/td&gt;&lt;td&gt;—&lt;/td&gt;&lt;/tr&gt;
-        &lt;tr&gt;&lt;td&gt;&lt;b&gt;Wednesday&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge badge-prog&quot;&gt;3 Medicine&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Orthopedics&lt;/td&gt;&lt;td&gt;50&lt;/td&gt;&lt;td&gt;—&lt;/td&gt;&lt;/tr&gt;
-        &lt;tr&gt;&lt;td&gt;&lt;b&gt;Thursday&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge badge-prog&quot;&gt;3 Medicine&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Radiology&lt;/td&gt;&lt;td&gt;50&lt;/td&gt;&lt;td&gt;—&lt;/td&gt;&lt;/tr&gt;
-        &lt;tr&gt;&lt;td&gt;&lt;b&gt;Friday&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge badge-prog&quot;&gt;3 Medicine&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Psychiatry&lt;/td&gt;&lt;td&gt;50&lt;/td&gt;&lt;td&gt;—&lt;/td&gt;&lt;/tr&gt;
-        &lt;tr&gt;&lt;td&gt;&lt;b&gt;Saturday&lt;/b&gt;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge badge-prog&quot;&gt;3 Medicine&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Ophthalmology&lt;/td&gt;&lt;td&gt;50&lt;/td&gt;&lt;td&gt;Weekly recap&lt;/td&gt;&lt;/tr&gt;
-        &lt;tr style=&quot;background:rgba(108,99,255,.06)&quot;&gt;&lt;td&gt;&lt;b&gt;Sunday ☀️&lt;/b&gt;&lt;/td&gt;&lt;td colspan=&quot;2&quot;&gt;&lt;span class=&quot;badge badge-done&quot;&gt;No new lectures&lt;/span&gt;&lt;/td&gt;&lt;td&gt;50&lt;/td&gt;&lt;td&gt;Weekly review + plan&lt;/td&gt;&lt;/tr&gt;
-      &lt;/tbody&gt;
-    &lt;/table&gt;
-  &lt;/div&gt;
+<!-- ══════════════════ WEEKLY PAGE ══════════════════ -->
+<div class="page" id="page-weekly">
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">📆 Weekly Schedule Template</div>
+    <table class="tbl">
+      <thead><tr><th>Day</th><th>Focus Subject</th><th>Low-Yield</th><th>MCQs</th><th>Special</th></tr></thead>
+      <tbody>
+        <tr><td><b>Monday</b></td><td><span class="badge badge-prog">3 Medicine</span></td><td>Physiology</td><td>50</td><td>—</td></tr>
+        <tr><td><b>Tuesday</b></td><td><span class="badge badge-prog">3 Medicine</span></td><td>Dermatology</td><td>50</td><td>—</td></tr>
+        <tr><td><b>Wednesday</b></td><td><span class="badge badge-prog">3 Medicine</span></td><td>Orthopedics</td><td>50</td><td>—</td></tr>
+        <tr><td><b>Thursday</b></td><td><span class="badge badge-prog">3 Medicine</span></td><td>Radiology</td><td>50</td><td>—</td></tr>
+        <tr><td><b>Friday</b></td><td><span class="badge badge-prog">3 Medicine</span></td><td>Psychiatry</td><td>50</td><td>—</td></tr>
+        <tr><td><b>Saturday</b></td><td><span class="badge badge-prog">3 Medicine</span></td><td>Ophthalmology</td><td>50</td><td>Weekly recap</td></tr>
+        <tr style="background:rgba(108,99,255,.06)"><td><b>Sunday ☀️</b></td><td colspan="2"><span class="badge badge-done">No new lectures</span></td><td>50</td><td>Weekly review + plan</td></tr>
+      </tbody>
+    </table>
+  </div>
 
-  &lt;div class=&quot;grid-2&quot;&gt;
-    &lt;div class=&quot;card&quot;&gt;
-      &lt;div class=&quot;card-title&quot;&gt;📋 Weekly Review Template&lt;/div&gt;
-      &lt;ul class=&quot;checklist&quot;&gt;
-        &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;Total lectures completed this week&lt;/span&gt;&lt;/li&gt;
-        &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;MCQ accuracy review (target: &gt;70%)&lt;/span&gt;&lt;/li&gt;
-        &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;Spaced repetition — any missed days?&lt;/span&gt;&lt;/li&gt;
-        &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;Error log patterns — recurring mistakes?&lt;/span&gt;&lt;/li&gt;
-        &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;Low-yield subjects covered?&lt;/span&gt;&lt;/li&gt;
-        &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;Study hours vs target (7 hrs/day)&lt;/span&gt;&lt;/li&gt;
-        &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;Plan next week's low-yield rotation&lt;/span&gt;&lt;/li&gt;
-        &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;GT coming? Revise weak areas&lt;/span&gt;&lt;/li&gt;
-      &lt;/ul&gt;
-    &lt;/div&gt;
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">📋 Weekly Review Template</div>
+      <ul class="checklist">
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Total lectures completed this week</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">MCQ accuracy review (target: >70%)</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Spaced repetition — any missed days?</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Error log patterns — recurring mistakes?</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Low-yield subjects covered?</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Study hours vs target (7 hrs/day)</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Plan next week's low-yield rotation</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">GT coming? Revise weak areas</span></li>
+      </ul>
+    </div>
 
-    &lt;div class=&quot;card&quot;&gt;
-      &lt;div class=&quot;card-title&quot;&gt;📊 This Week's Numbers&lt;/div&gt;
-      &lt;div class=&quot;prog-wrap&quot;&gt;
-        &lt;div class=&quot;prog-header&quot;&gt;&lt;span&gt;Lectures (target 18/wk)&lt;/span&gt;&lt;span class=&quot;prog-pct&quot; id=&quot;wk-lec-pct&quot;&gt;0%&lt;/span&gt;&lt;/div&gt;
-        &lt;div class=&quot;prog-track&quot;&gt;&lt;div class=&quot;prog-fill fill-purple&quot; id=&quot;wk-lec-bar&quot; style=&quot;width:0%&quot;&gt;&lt;/div&gt;&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;prog-wrap&quot;&gt;
-        &lt;div class=&quot;prog-header&quot;&gt;&lt;span&gt;MCQs (target 350/wk)&lt;/span&gt;&lt;span class=&quot;prog-pct&quot; id=&quot;wk-mcq-pct&quot;&gt;0%&lt;/span&gt;&lt;/div&gt;
-        &lt;div class=&quot;prog-track&quot;&gt;&lt;div class=&quot;prog-fill fill-yellow&quot; id=&quot;wk-mcq-bar&quot; style=&quot;width:0%&quot;&gt;&lt;/div&gt;&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div style=&quot;margin-top:14px&quot;&gt;
-        &lt;div style=&quot;font-size:12px;color:var(--muted);margin-bottom:8px&quot;&gt;Enter this week's numbers:&lt;/div&gt;
-        &lt;div style=&quot;display:flex;gap:8px;flex-wrap:wrap&quot;&gt;
-          &lt;input type=&quot;number&quot; placeholder=&quot;Lectures done&quot; id=&quot;wk-lec-input&quot; style=&quot;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:130px&quot; oninput=&quot;updateWeekly()&quot;&gt;
-          &lt;input type=&quot;number&quot; placeholder=&quot;MCQs done&quot; id=&quot;wk-mcq-input&quot; style=&quot;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:130px&quot; oninput=&quot;updateWeekly()&quot;&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+    <div class="card">
+      <div class="card-title">📊 This Week's Numbers</div>
+      <div class="prog-wrap">
+        <div class="prog-header"><span>Lectures (target 18/wk)</span><span class="prog-pct" id="wk-lec-pct">0%</span></div>
+        <div class="prog-track"><div class="prog-fill fill-purple" id="wk-lec-bar" style="width:0%"></div></div>
+      </div>
+      <div class="prog-wrap">
+        <div class="prog-header"><span>MCQs (target 350/wk)</span><span class="prog-pct" id="wk-mcq-pct">0%</span></div>
+        <div class="prog-track"><div class="prog-fill fill-yellow" id="wk-mcq-bar" style="width:0%"></div></div>
+      </div>
+      <div style="margin-top:14px">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:8px">Enter this week's numbers:</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <input type="number" placeholder="Lectures done" id="wk-lec-input" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:130px" oninput="updateWeekly()">
+          <input type="number" placeholder="MCQs done" id="wk-mcq-input" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:130px" oninput="updateWeekly()">
+        </div>
+      </div>
+    </div>
+  </div>
 
-  &lt;!-- Monthly Checklist --&gt;
-  &lt;div class=&quot;sec-header mt20&quot;&gt;&lt;div class=&quot;sec-line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;sec-label&quot;&gt;Monthly Checklist&lt;/div&gt;&lt;div class=&quot;sec-line&quot;&gt;&lt;/div&gt;&lt;/div&gt;
-  &lt;div class=&quot;card&quot;&gt;
-    &lt;div class=&quot;card-title&quot;&gt;📅 End-of-Month Review + Spaced Repetition Reset&lt;/div&gt;
-    &lt;ul class=&quot;checklist&quot;&gt;
-      &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;✅ Count total Medicine lectures done (target: ~60/month)&lt;/span&gt;&lt;span class=&quot;check-tag tag-med&quot;&gt;MED&lt;/span&gt;&lt;/li&gt;
-      &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;📊 Review MCQ accuracy trend — improving?&lt;/span&gt;&lt;span class=&quot;check-tag tag-mcq&quot;&gt;MCQ&lt;/span&gt;&lt;/li&gt;
-      &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;🎯 Grand Test analysis — both GTs of month done?&lt;/span&gt;&lt;span class=&quot;check-tag tag-gt&quot;&gt;GT&lt;/span&gt;&lt;/li&gt;
-      &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;🔁 SR Review — all Day-30 topics revised this month&lt;/span&gt;&lt;span class=&quot;check-tag tag-rev&quot;&gt;SR&lt;/span&gt;&lt;/li&gt;
-      &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;📖 Completed subjects revised via Marrow revision videos&lt;/span&gt;&lt;span class=&quot;check-tag tag-rev&quot;&gt;REV&lt;/span&gt;&lt;/li&gt;
-      &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;❌ Wrong notebook — identify top 3 weak topics&lt;/span&gt;&lt;span class=&quot;check-tag tag-must&quot;&gt;LOG&lt;/span&gt;&lt;/li&gt;
-      &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;📝 Monthly reflection — burnout signals? energy level?&lt;/span&gt;&lt;span class=&quot;check-tag tag-low&quot;&gt;REFLECT&lt;/span&gt;&lt;/li&gt;
-      &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;📆 Plan next month — which low-yield subjects to intensify&lt;/span&gt;&lt;span class=&quot;check-tag tag-low&quot;&gt;PLAN&lt;/span&gt;&lt;/li&gt;
-      &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;🏃 Self-care check — sleep, exercise, breaks maintained?&lt;/span&gt;&lt;span class=&quot;check-tag tag-low&quot;&gt;HEALTH&lt;/span&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
+  <!-- Monthly Checklist -->
+  <div class="sec-header mt20"><div class="sec-line"></div><div class="sec-label">Monthly Checklist</div><div class="sec-line"></div></div>
+  <div class="card">
+    <div class="card-title">📅 End-of-Month Review + Spaced Repetition Reset</div>
+    <ul class="checklist">
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">✅ Count total Medicine lectures done (target: ~60/month)</span><span class="check-tag tag-med">MED</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📊 Review MCQ accuracy trend — improving?</span><span class="check-tag tag-mcq">MCQ</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">🎯 Grand Test analysis — both GTs of month done?</span><span class="check-tag tag-gt">GT</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">🔁 SR Review — all Day-30 topics revised this month</span><span class="check-tag tag-rev">SR</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📖 Completed subjects revised via Marrow revision videos</span><span class="check-tag tag-rev">REV</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">❌ Wrong notebook — identify top 3 weak topics</span><span class="check-tag tag-must">LOG</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📝 Monthly reflection — burnout signals? energy level?</span><span class="check-tag tag-low">REFLECT</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📆 Plan next month — which low-yield subjects to intensify</span><span class="check-tag tag-low">PLAN</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">🏃 Self-care check — sleep, exercise, breaks maintained?</span><span class="check-tag tag-low">HEALTH</span></li>
+    </ul>
+  </div>
+</div>
 
-&lt;!-- ══════════════════ TRACKER PAGE ══════════════════ --&gt;
-&lt;div class=&quot;page&quot; id=&quot;page-tracker&quot;&gt;
+<!-- ══════════════════ TRACKER PAGE ══════════════════ -->
+<div class="page" id="page-tracker">
 
-  &lt;!-- Medicine Progress --&gt;
-  &lt;div class=&quot;card&quot; style=&quot;margin-bottom:16px&quot;&gt;
-    &lt;div class=&quot;card-title&quot;&gt;💊 Medicine Tracker — Marrow Lectures&lt;/div&gt;
-    &lt;div class=&quot;stat-row&quot;&gt;
-      &lt;div class=&quot;stat green&quot;&gt;&lt;div class=&quot;stat-val&quot; id=&quot;med-completed&quot;&gt;0&lt;/div&gt;&lt;div class=&quot;stat-label&quot;&gt;Completed&lt;/div&gt;&lt;/div&gt;
-      &lt;div class=&quot;stat yellow&quot;&gt;&lt;div class=&quot;stat-val&quot; id=&quot;med-remaining&quot;&gt;171&lt;/div&gt;&lt;div class=&quot;stat-label&quot;&gt;Remaining&lt;/div&gt;&lt;/div&gt;
-      &lt;div class=&quot;stat blue&quot;&gt;&lt;div class=&quot;stat-val&quot; id=&quot;med-days&quot;&gt;57&lt;/div&gt;&lt;div class=&quot;stat-label&quot;&gt;Days to finish&lt;/div&gt;&lt;/div&gt;
-      &lt;div class=&quot;stat teal&quot;&gt;&lt;div class=&quot;stat-val&quot; id=&quot;med-pct-val&quot;&gt;0%&lt;/div&gt;&lt;div class=&quot;stat-label&quot;&gt;Complete&lt;/div&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;prog-wrap&quot;&gt;
-      &lt;div class=&quot;prog-header&quot;&gt;&lt;span&gt;Medicine Progress (171 lectures)&lt;/span&gt;&lt;span class=&quot;prog-pct&quot; id=&quot;med-pct&quot;&gt;0%&lt;/span&gt;&lt;/div&gt;
-      &lt;div class=&quot;prog-track&quot;&gt;&lt;div class=&quot;prog-fill fill-purple&quot; id=&quot;med-bar&quot; style=&quot;width:0%&quot;&gt;&lt;/div&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div style=&quot;display:flex;gap:10px;margin-top:12px;align-items:center&quot;&gt;
-      &lt;input type=&quot;range&quot; id=&quot;med-slider&quot; min=&quot;0&quot; max=&quot;171&quot; value=&quot;0&quot; style=&quot;flex:1;accent-color:var(--accent)&quot; oninput=&quot;updateMed(this.value)&quot;&gt;
-      &lt;span style=&quot;font-family:var(--mono);font-size:13px;min-width:30px&quot; id=&quot;med-slider-val&quot;&gt;0&lt;/span&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+  <!-- Medicine Progress -->
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">💊 Medicine Tracker — Marrow Lectures</div>
+    <div class="stat-row">
+      <div class="stat green"><div class="stat-val" id="med-completed">0</div><div class="stat-label">Completed</div></div>
+      <div class="stat yellow"><div class="stat-val" id="med-remaining">171</div><div class="stat-label">Remaining</div></div>
+      <div class="stat blue"><div class="stat-val" id="med-days">57</div><div class="stat-label">Days to finish</div></div>
+      <div class="stat teal"><div class="stat-val" id="med-pct-val">0%</div><div class="stat-label">Complete</div></div>
+    </div>
+    <div class="prog-wrap">
+      <div class="prog-header"><span>Medicine Progress (171 lectures)</span><span class="prog-pct" id="med-pct">0%</span></div>
+      <div class="prog-track"><div class="prog-fill fill-purple" id="med-bar" style="width:0%"></div></div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:12px;align-items:center">
+      <input type="range" id="med-slider" min="0" max="171" value="0" style="flex:1;accent-color:var(--accent)" oninput="updateMed(this.value)">
+      <span style="font-family:var(--mono);font-size:13px;min-width:30px" id="med-slider-val">0</span>
+    </div>
+  </div>
 
-  &lt;!-- Subject Progress --&gt;
-  &lt;div class=&quot;card&quot; style=&quot;margin-bottom:16px&quot;&gt;
-    &lt;div class=&quot;card-title&quot;&gt;📚 Subject Progress Tracker&lt;/div&gt;
-    &lt;div id=&quot;subject-progress&quot;&gt;
-      &lt;!-- Completed subjects --&gt;
-      &lt;div style=&quot;margin-bottom:16px&quot;&gt;
-        &lt;div class=&quot;sec-label&quot; style=&quot;margin-bottom:10px;display:block&quot;&gt;✅ Completed — Revision Only&lt;/div&gt;
-        &lt;div class=&quot;prog-wrap&quot;&gt;&lt;div class=&quot;prog-header&quot;&gt;&lt;span&gt;Surgery&lt;/span&gt;&lt;span class=&quot;chip chip-green&quot;&gt;Done&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;prog-track&quot;&gt;&lt;div class=&quot;prog-fill fill-green&quot; style=&quot;width:100%&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
-        &lt;div class=&quot;prog-wrap&quot;&gt;&lt;div class=&quot;prog-header&quot;&gt;&lt;span&gt;Obstetrics &amp; Gynaecology&lt;/span&gt;&lt;span class=&quot;chip chip-green&quot;&gt;Done&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;prog-track&quot;&gt;&lt;div class=&quot;prog-fill fill-green&quot; style=&quot;width:100%&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
-        &lt;div class=&quot;prog-wrap&quot;&gt;&lt;div class=&quot;prog-header&quot;&gt;&lt;span&gt;PSM&lt;/span&gt;&lt;span class=&quot;chip chip-green&quot;&gt;Done&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;prog-track&quot;&gt;&lt;div class=&quot;prog-fill fill-green&quot; style=&quot;width:100%&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
-        &lt;div class=&quot;prog-wrap&quot;&gt;&lt;div class=&quot;prog-header&quot;&gt;&lt;span&gt;ENT&lt;/span&gt;&lt;span class=&quot;chip chip-green&quot;&gt;Done&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;prog-track&quot;&gt;&lt;div class=&quot;prog-fill fill-green&quot; style=&quot;width:100%&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
-        &lt;div class=&quot;prog-wrap&quot;&gt;&lt;div class=&quot;prog-header&quot;&gt;&lt;span&gt;Forensic Medicine&lt;/span&gt;&lt;span class=&quot;chip chip-green&quot;&gt;Done&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;prog-track&quot;&gt;&lt;div class=&quot;prog-fill fill-green&quot; style=&quot;width:100%&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
-      &lt;/div&gt;
+  <!-- Subject Progress -->
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">📚 Subject Progress Tracker</div>
+    <div id="subject-progress">
+      <!-- Completed subjects -->
+      <div style="margin-bottom:16px">
+        <div class="sec-label" style="margin-bottom:10px;display:block">✅ Completed — Revision Only</div>
+        <div class="prog-wrap"><div class="prog-header"><span>Surgery</span><span class="chip chip-green">Done</span></div><div class="prog-track"><div class="prog-fill fill-green" style="width:100%"></div></div></div>
+        <div class="prog-wrap"><div class="prog-header"><span>Obstetrics & Gynaecology</span><span class="chip chip-green">Done</span></div><div class="prog-track"><div class="prog-fill fill-green" style="width:100%"></div></div></div>
+        <div class="prog-wrap"><div class="prog-header"><span>PSM</span><span class="chip chip-green">Done</span></div><div class="prog-track"><div class="prog-fill fill-green" style="width:100%"></div></div></div>
+        <div class="prog-wrap"><div class="prog-header"><span>ENT</span><span class="chip chip-green">Done</span></div><div class="prog-track"><div class="prog-fill fill-green" style="width:100%"></div></div></div>
+        <div class="prog-wrap"><div class="prog-header"><span>Forensic Medicine</span><span class="chip chip-green">Done</span></div><div class="prog-track"><div class="prog-fill fill-green" style="width:100%"></div></div></div>
+      </div>
 
-      &lt;div style=&quot;margin-bottom:16px&quot;&gt;
-        &lt;div class=&quot;sec-label&quot; style=&quot;margin-bottom:10px;display:block&quot;&gt;🔄 Active — In Progress&lt;/div&gt;
-        &lt;div class=&quot;prog-wrap&quot;&gt;
-          &lt;div class=&quot;prog-header&quot;&gt;&lt;span&gt;Medicine&lt;/span&gt;&lt;span class=&quot;prog-pct&quot; id=&quot;med-subj-pct&quot;&gt;0%&lt;/span&gt;&lt;/div&gt;
-          &lt;div class=&quot;prog-track&quot;&gt;&lt;div class=&quot;prog-fill fill-purple&quot; id=&quot;med-subj-bar&quot; style=&quot;width:0%&quot;&gt;&lt;/div&gt;&lt;/div&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
+      <div style="margin-bottom:16px">
+        <div class="sec-label" style="margin-bottom:10px;display:block">🔄 Active — In Progress</div>
+        <div class="prog-wrap">
+          <div class="prog-header"><span>Medicine</span><span class="prog-pct" id="med-subj-pct">0%</span></div>
+          <div class="prog-track"><div class="prog-fill fill-purple" id="med-subj-bar" style="width:0%"></div></div>
+        </div>
+      </div>
 
-      &lt;div&gt;
-        &lt;div class=&quot;sec-label&quot; style=&quot;margin-bottom:10px;display:block&quot;&gt;🕐 Low-Yield — Running Parallel&lt;/div&gt;
-        &lt;div class=&quot;prog-wrap&quot;&gt;&lt;div class=&quot;prog-header&quot;&gt;&lt;span&gt;Physiology&lt;/span&gt;&lt;span class=&quot;prog-pct&quot;&gt;–&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;prog-track&quot;&gt;&lt;div class=&quot;prog-fill fill-teal&quot; style=&quot;width:0%&quot; id=&quot;phy-bar&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
-        &lt;div class=&quot;prog-wrap&quot;&gt;&lt;div class=&quot;prog-header&quot;&gt;&lt;span&gt;Dermatology&lt;/span&gt;&lt;span class=&quot;prog-pct&quot;&gt;–&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;prog-track&quot;&gt;&lt;div class=&quot;prog-fill fill-blue&quot; style=&quot;width:0%&quot; id=&quot;derm-bar&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
-        &lt;div class=&quot;prog-wrap&quot;&gt;&lt;div class=&quot;prog-header&quot;&gt;&lt;span&gt;Orthopedics&lt;/span&gt;&lt;span class=&quot;prog-pct&quot;&gt;–&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;prog-track&quot;&gt;&lt;div class=&quot;prog-fill fill-yellow&quot; style=&quot;width:0%&quot; id=&quot;ortho-bar&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
-        &lt;div class=&quot;prog-wrap&quot;&gt;&lt;div class=&quot;prog-header&quot;&gt;&lt;span&gt;Radiology&lt;/span&gt;&lt;span class=&quot;prog-pct&quot;&gt;–&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;prog-track&quot;&gt;&lt;div class=&quot;prog-fill fill-red&quot; style=&quot;width:0%&quot; id=&quot;radio-bar&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
-        &lt;div class=&quot;prog-wrap&quot;&gt;&lt;div class=&quot;prog-header&quot;&gt;&lt;span&gt;Psychiatry&lt;/span&gt;&lt;span class=&quot;prog-pct&quot;&gt;–&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;prog-track&quot;&gt;&lt;div class=&quot;prog-fill fill-purple&quot; style=&quot;width:0%&quot; id=&quot;psych-bar&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
-        &lt;div class=&quot;prog-wrap&quot;&gt;&lt;div class=&quot;prog-header&quot;&gt;&lt;span&gt;Ophthalmology&lt;/span&gt;&lt;span class=&quot;prog-pct&quot;&gt;–&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;prog-track&quot;&gt;&lt;div class=&quot;prog-fill fill-green&quot; style=&quot;width:0%&quot; id=&quot;ophtho-bar&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
-      &lt;/div&gt;
+      <div>
+        <div class="sec-label" style="margin-bottom:10px;display:block">🕐 Low-Yield — Running Parallel</div>
+        <div class="prog-wrap"><div class="prog-header"><span>Physiology</span><span class="prog-pct">–</span></div><div class="prog-track"><div class="prog-fill fill-teal" style="width:0%" id="phy-bar"></div></div></div>
+        <div class="prog-wrap"><div class="prog-header"><span>Dermatology</span><span class="prog-pct">–</span></div><div class="prog-track"><div class="prog-fill fill-blue" style="width:0%" id="derm-bar"></div></div></div>
+        <div class="prog-wrap"><div class="prog-header"><span>Orthopedics</span><span class="prog-pct">–</span></div><div class="prog-track"><div class="prog-fill fill-yellow" style="width:0%" id="ortho-bar"></div></div></div>
+        <div class="prog-wrap"><div class="prog-header"><span>Radiology</span><span class="prog-pct">–</span></div><div class="prog-track"><div class="prog-fill fill-red" style="width:0%" id="radio-bar"></div></div></div>
+        <div class="prog-wrap"><div class="prog-header"><span>Psychiatry</span><span class="prog-pct">–</span></div><div class="prog-track"><div class="prog-fill fill-purple" style="width:0%" id="psych-bar"></div></div></div>
+        <div class="prog-wrap"><div class="prog-header"><span>Ophthalmology</span><span class="prog-pct">–</span></div><div class="prog-track"><div class="prog-fill fill-green" style="width:0%" id="ophtho-bar"></div></div></div>
+      </div>
 
-      &lt;div style=&quot;margin-top:16px&quot;&gt;
-        &lt;div class=&quot;sec-label&quot; style=&quot;margin-bottom:10px;display:block&quot;&gt;🔮 Later — Anatomy, Pharma, Patho, Micro&lt;/div&gt;
-        &lt;div style=&quot;display:flex;gap:8px;flex-wrap:wrap&quot;&gt;
-          &lt;span class=&quot;badge badge-todo&quot;&gt;Anatomy&lt;/span&gt;
-          &lt;span class=&quot;badge badge-todo&quot;&gt;Pharmacology&lt;/span&gt;
-          &lt;span class=&quot;badge badge-todo&quot;&gt;Pathology&lt;/span&gt;
-          &lt;span class=&quot;badge badge-todo&quot;&gt;Microbiology&lt;/span&gt;
-        &lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+      <div style="margin-top:16px">
+        <div class="sec-label" style="margin-bottom:10px;display:block">🔮 Later — Anatomy, Pharma, Patho, Micro</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span class="badge badge-todo">Anatomy</span>
+          <span class="badge badge-todo">Pharmacology</span>
+          <span class="badge badge-todo">Pathology</span>
+          <span class="badge badge-todo">Microbiology</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  &lt;!-- MCQ Tracker --&gt;
-  &lt;div class=&quot;card&quot;&gt;
-    &lt;div class=&quot;card-title&quot;&gt;❓ MCQ Tracker&lt;/div&gt;
-    &lt;div class=&quot;stat-row&quot;&gt;
-      &lt;div class=&quot;stat green&quot;&gt;&lt;div class=&quot;stat-val&quot; id=&quot;mcq-done&quot;&gt;0&lt;/div&gt;&lt;div class=&quot;stat-label&quot;&gt;Done&lt;/div&gt;&lt;/div&gt;
-      &lt;div class=&quot;stat yellow&quot;&gt;&lt;div class=&quot;stat-val&quot; id=&quot;mcq-acc&quot;&gt;—%&lt;/div&gt;&lt;div class=&quot;stat-label&quot;&gt;Accuracy&lt;/div&gt;&lt;/div&gt;
-      &lt;div class=&quot;stat blue&quot;&gt;&lt;div class=&quot;stat-val&quot; id=&quot;mcq-wrong&quot;&gt;0&lt;/div&gt;&lt;div class=&quot;stat-label&quot;&gt;Wrong (Log)&lt;/div&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div style=&quot;display:flex;gap:10px;flex-wrap:wrap;margin-top:4px&quot;&gt;
-      &lt;input type=&quot;number&quot; placeholder=&quot;MCQs today&quot; id=&quot;mcq-inp&quot; style=&quot;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:130px&quot;&gt;
-      &lt;input type=&quot;number&quot; placeholder=&quot;Correct&quot; id=&quot;mcq-correct&quot; style=&quot;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:130px&quot;&gt;
-      &lt;button class=&quot;btn btn-primary&quot; onclick=&quot;logMCQ()&quot; style=&quot;font-size:13px;padding:8px 16px&quot;&gt;Log MCQs&lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
+  <!-- MCQ Tracker -->
+  <div class="card">
+    <div class="card-title">❓ MCQ Tracker</div>
+    <div class="stat-row">
+      <div class="stat green"><div class="stat-val" id="mcq-done">0</div><div class="stat-label">Done</div></div>
+      <div class="stat yellow"><div class="stat-val" id="mcq-acc">—%</div><div class="stat-label">Accuracy</div></div>
+      <div class="stat blue"><div class="stat-val" id="mcq-wrong">0</div><div class="stat-label">Wrong (Log)</div></div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:4px">
+      <input type="number" placeholder="MCQs today" id="mcq-inp" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:130px">
+      <input type="number" placeholder="Correct" id="mcq-correct" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:130px">
+      <button class="btn btn-primary" onclick="logMCQ()" style="font-size:13px;padding:8px 16px">Log MCQs</button>
+    </div>
+  </div>
+</div>
 
-&lt;!-- ══════════════════ GT PAGE ══════════════════ --&gt;
-&lt;div class=&quot;page&quot; id=&quot;page-gt&quot;&gt;
-  &lt;div class=&quot;intro-banner&quot;&gt;
-    &lt;h2&gt;🎯 Grand Test Tracker&lt;/h2&gt;
-    &lt;p&gt;Every month: 7th &amp; 17th. Test → Analyse → Create revision tasks → Execute.&lt;/p&gt;
-  &lt;/div&gt;
+<!-- ══════════════════ GT PAGE ══════════════════ -->
+<div class="page" id="page-gt">
+  <div class="intro-banner">
+    <h2>🎯 Grand Test Tracker</h2>
+    <p>Every month: 7th & 17th. Test → Analyse → Create revision tasks → Execute.</p>
+  </div>
 
-  &lt;div class=&quot;card&quot; style=&quot;margin-bottom:16px&quot;&gt;
-    &lt;div class=&quot;card-title&quot;&gt;📋 GT Day Checklist&lt;/div&gt;
-    &lt;ul class=&quot;checklist&quot;&gt;
-      &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;✍️ Attempt Grand Test — full exam conditions&lt;/span&gt;&lt;span class=&quot;check-tag tag-gt&quot;&gt;GT&lt;/span&gt;&lt;/li&gt;
-      &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;📊 Analyse score — subject-wise breakdown&lt;/span&gt;&lt;span class=&quot;check-tag tag-gt&quot;&gt;GT&lt;/span&gt;&lt;/li&gt;
-      &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;❌ List all wrong answers with explanations&lt;/span&gt;&lt;span class=&quot;check-tag tag-must&quot;&gt;LOG&lt;/span&gt;&lt;/li&gt;
-      &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;🔴 Tag weak subjects / topic clusters&lt;/span&gt;&lt;span class=&quot;check-tag tag-gt&quot;&gt;ANALYSE&lt;/span&gt;&lt;/li&gt;
-      &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;📝 Create follow-up revision tasks for next 7 days&lt;/span&gt;&lt;span class=&quot;check-tag tag-rev&quot;&gt;SR&lt;/span&gt;&lt;/li&gt;
-      &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;⚡ Add GT mistakes to Wrong Question Notebook&lt;/span&gt;&lt;span class=&quot;check-tag tag-must&quot;&gt;LOG&lt;/span&gt;&lt;/li&gt;
-      &lt;li class=&quot;check-item&quot; onclick=&quot;toggleCheck(this)&quot;&gt;&lt;div class=&quot;check-box&quot;&gt;&lt;/div&gt;&lt;span class=&quot;check-label&quot;&gt;📈 Update GT score chart (see below)&lt;/span&gt;&lt;span class=&quot;check-tag tag-gt&quot;&gt;TRACK&lt;/span&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/div&gt;
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">📋 GT Day Checklist</div>
+    <ul class="checklist">
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">✍️ Attempt Grand Test — full exam conditions</span><span class="check-tag tag-gt">GT</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📊 Analyse score — subject-wise breakdown</span><span class="check-tag tag-gt">GT</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">❌ List all wrong answers with explanations</span><span class="check-tag tag-must">LOG</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">🔴 Tag weak subjects / topic clusters</span><span class="check-tag tag-gt">ANALYSE</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📝 Create follow-up revision tasks for next 7 days</span><span class="check-tag tag-rev">SR</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">⚡ Add GT mistakes to Wrong Question Notebook</span><span class="check-tag tag-must">LOG</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📈 Update GT score chart (see below)</span><span class="check-tag tag-gt">TRACK</span></li>
+    </ul>
+  </div>
 
-  &lt;div class=&quot;card&quot; style=&quot;margin-bottom:16px&quot;&gt;
-    &lt;div class=&quot;card-title&quot;&gt;📈 GT Score History&lt;/div&gt;
-    &lt;table class=&quot;tbl&quot; id=&quot;gt-table&quot;&gt;
-      &lt;thead&gt;&lt;tr&gt;&lt;th&gt;GT #&lt;/th&gt;&lt;th&gt;Date&lt;/th&gt;&lt;th&gt;Score&lt;/th&gt;&lt;th&gt;Rank/Percentile&lt;/th&gt;&lt;th&gt;Weakest Subject&lt;/th&gt;&lt;th&gt;Status&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
-      &lt;tbody id=&quot;gt-tbody&quot;&gt;
-        &lt;!-- Rendered by JS --&gt;
-      &lt;/tbody&gt;
-    &lt;/table&gt;
-    &lt;div style=&quot;margin-top:12px;display:flex;gap:8px;flex-wrap:wrap&quot;&gt;
-      &lt;input type=&quot;text&quot; placeholder=&quot;GT date (e.g. July 7)&quot; id=&quot;gt-date&quot; style=&quot;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:150px&quot;&gt;
-      &lt;input type=&quot;text&quot; placeholder=&quot;Score&quot; id=&quot;gt-score&quot; style=&quot;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:100px&quot;&gt;
-      &lt;input type=&quot;text&quot; placeholder=&quot;Weak subject&quot; id=&quot;gt-weak&quot; style=&quot;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:150px&quot;&gt;
-      &lt;button class=&quot;btn btn-primary&quot; onclick=&quot;addGT()&quot; style=&quot;font-size:13px;padding:8px 16px&quot;&gt;Add GT&lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">📈 GT Score History</div>
+    <table class="tbl" id="gt-table">
+      <thead><tr><th>GT #</th><th>Date</th><th>Score</th><th>Rank/Percentile</th><th>Weakest Subject</th><th>Status</th></tr></thead>
+      <tbody id="gt-tbody">
+        <tr><td>GT 1</td><td>Month 1, 7th</td><td>—</td><td>—</td><td>—</td><td><span class="badge badge-todo">Upcoming</span></td></tr>
+        <tr><td>GT 2</td><td>Month 1, 17th</td><td>—</td><td>—</td><td>—</td><td><span class="badge badge-todo">Upcoming</span></td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+      <input type="text" placeholder="GT date (e.g. July 7)" id="gt-date" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:150px">
+      <input type="text" placeholder="Score" id="gt-score" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:100px">
+      <input type="text" placeholder="Weak subject" id="gt-weak" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:150px">
+      <button class="btn btn-primary" onclick="addGT()" style="font-size:13px;padding:8px 16px">Add GT</button>
+    </div>
+  </div>
 
-  &lt;div class=&quot;card&quot;&gt;
-    &lt;div class=&quot;card-title&quot;&gt;🗒 GT Analysis Template — Post-Test Deep Dive&lt;/div&gt;
-    &lt;div style=&quot;display:grid;grid-template-columns:1fr 1fr;gap:12px&quot;&gt;
-      &lt;div style=&quot;background:var(--surface2);border-radius:8px;padding:14px&quot;&gt;
-        &lt;div style=&quot;font-size:11px;font-weight:600;color:var(--green);margin-bottom:8px&quot;&gt;✅ STRENGTHS&lt;/div&gt;
-        &lt;div style=&quot;font-size:12px;color:var(--muted);line-height:1.8&quot;&gt;Subjects scored &gt;70%&lt;br&gt;Topics where accuracy was high&lt;br&gt;Time management wins&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div style=&quot;background:var(--surface2);border-radius:8px;padding:14px&quot;&gt;
-        &lt;div style=&quot;font-size:11px;font-weight:600;color:var(--red);margin-bottom:8px&quot;&gt;❌ WEAK AREAS&lt;/div&gt;
-        &lt;div style=&quot;font-size:12px;color:var(--muted);line-height:1.8&quot;&gt;Subjects scored &amp;lt;50%&lt;br&gt;Topics with &gt;3 wrong answers&lt;br&gt;Time-trap questions&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div style=&quot;background:var(--surface2);border-radius:8px;padding:14px&quot;&gt;
-        &lt;div style=&quot;font-size:11px;font-weight:600;color:var(--yellow);margin-bottom:8px&quot;&gt;🔁 ACTION ITEMS&lt;/div&gt;
-        &lt;div style=&quot;font-size:12px;color:var(--muted);line-height:1.8&quot;&gt;Re-read weak topic notes&lt;br&gt;Do 25 targeted MCQs/topic&lt;br&gt;Spaced revision in 1-3-7 days&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div style=&quot;background:var(--surface2);border-radius:8px;padding:14px&quot;&gt;
-        &lt;div style=&quot;font-size:11px;font-weight:600;color:var(--blue);margin-bottom:8px&quot;&gt;📈 NEXT GT GOAL&lt;/div&gt;
-        &lt;div style=&quot;font-size:12px;color:var(--muted);line-height:1.8&quot;&gt;Score improvement target&lt;br&gt;1 subject to focus hard on&lt;br&gt;Accuracy target: 70%+&lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
+  <div class="card">
+    <div class="card-title">🗒 GT Analysis Template — Post-Test Deep Dive</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div style="background:var(--surface2);border-radius:8px;padding:14px">
+        <div style="font-size:11px;font-weight:600;color:var(--green);margin-bottom:8px">✅ STRENGTHS</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.8">Subjects scored >70%<br>Topics where accuracy was high<br>Time management wins</div>
+      </div>
+      <div style="background:var(--surface2);border-radius:8px;padding:14px">
+        <div style="font-size:11px;font-weight:600;color:var(--red);margin-bottom:8px">❌ WEAK AREAS</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.8">Subjects scored &lt;50%<br>Topics with >3 wrong answers<br>Time-trap questions</div>
+      </div>
+      <div style="background:var(--surface2);border-radius:8px;padding:14px">
+        <div style="font-size:11px;font-weight:600;color:var(--yellow);margin-bottom:8px">🔁 ACTION ITEMS</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.8">Re-read weak topic notes<br>Do 25 targeted MCQs/topic<br>Spaced revision in 1-3-7 days</div>
+      </div>
+      <div style="background:var(--surface2);border-radius:8px;padding:14px">
+        <div style="font-size:11px;font-weight:600;color:var(--blue);margin-bottom:8px">📈 NEXT GT GOAL</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.8">Score improvement target<br>1 subject to focus hard on<br>Accuracy target: 70%+</div>
+      </div>
+    </div>
+  </div>
+</div>
 
-&lt;!-- ══════════════════ REVISION PAGE ══════════════════ --&gt;
-&lt;div class=&quot;page&quot; id=&quot;page-revision&quot;&gt;
-  &lt;div class=&quot;card&quot; style=&quot;margin-bottom:16px&quot;&gt;
-    &lt;div class=&quot;card-title&quot;&gt;🔁 Spaced Repetition — 1-3-7-15-30 System&lt;/div&gt;
-    &lt;div style=&quot;display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px&quot;&gt;
-      &lt;span style=&quot;padding:6px 14px;border-radius:99px;background:rgba(239,68,68,.15);color:var(--red);font-size:12px;font-weight:600&quot;&gt;Day 1 · Same day&lt;/span&gt;
-      &lt;span style=&quot;padding:6px 14px;border-radius:99px;background:rgba(245,158,11,.15);color:var(--yellow);font-size:12px;font-weight:600&quot;&gt;Day 3 · 3 days later&lt;/span&gt;
-      &lt;span style=&quot;padding:6px 14px;border-radius:99px;background:rgba(108,99,255,.15);color:var(--accent2);font-size:12px;font-weight:600&quot;&gt;Day 7 · 1 week later&lt;/span&gt;
-      &lt;span style=&quot;padding:6px 14px;border-radius:99px;background:rgba(20,184,166,.15);color:var(--teal);font-size:12px;font-weight:600&quot;&gt;Day 15 · 2 weeks later&lt;/span&gt;
-      &lt;span style=&quot;padding:6px 14px;border-radius:99px;background:rgba(34,197,94,.15);color:var(--green);font-size:12px;font-weight:600&quot;&gt;Day 30 · 1 month later&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div style=&quot;background:var(--surface2);border-radius:8px;padding:14px;font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:16px&quot;&gt;
-      &lt;b style=&quot;color:var(--text)&quot;&gt;How to use:&lt;/b&gt; Every time you finish a lecture or topic, log it below. The system tells you when to revise it again. On revision days, quickly skim your notes and recall from memory before checking.
-    &lt;/div&gt;
+<!-- ══════════════════ REVISION PAGE ══════════════════ -->
+<div class="page" id="page-revision">
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">🔁 Spaced Repetition — 1-3-7-15-30 System</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+      <span style="padding:6px 14px;border-radius:99px;background:rgba(239,68,68,.15);color:var(--red);font-size:12px;font-weight:600">Day 1 · Same day</span>
+      <span style="padding:6px 14px;border-radius:99px;background:rgba(245,158,11,.15);color:var(--yellow);font-size:12px;font-weight:600">Day 3 · 3 days later</span>
+      <span style="padding:6px 14px;border-radius:99px;background:rgba(108,99,255,.15);color:var(--accent2);font-size:12px;font-weight:600">Day 7 · 1 week later</span>
+      <span style="padding:6px 14px;border-radius:99px;background:rgba(20,184,166,.15);color:var(--teal);font-size:12px;font-weight:600">Day 15 · 2 weeks later</span>
+      <span style="padding:6px 14px;border-radius:99px;background:rgba(34,197,94,.15);color:var(--green);font-size:12px;font-weight:600">Day 30 · 1 month later</span>
+    </div>
+    <div style="background:var(--surface2);border-radius:8px;padding:14px;font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:16px">
+      <b style="color:var(--text)">How to use:</b> Every time you finish a lecture or topic, log it below. The system tells you when to revise it again. On revision days, quickly skim your notes and recall from memory before checking.
+    </div>
     
-    &lt;!-- SR log --&gt;
-    &lt;div class=&quot;flex-between&quot; style=&quot;margin-bottom:10px&quot;&gt;
-      &lt;div style=&quot;font-size:13px;font-weight:600&quot;&gt;Due for Revision Today&lt;/div&gt;
-      &lt;button class=&quot;btn btn-outline&quot; style=&quot;font-size:11px;padding:6px 12px&quot; onclick=&quot;addSRTopic()&quot;&gt;+ Add Topic&lt;/button&gt;
-    &lt;/div&gt;
-    &lt;div id=&quot;sr-list&quot;&gt;
-      &lt;div class=&quot;sr-row&quot;&gt;
-        &lt;div class=&quot;sr-dot&quot; style=&quot;background:var(--red)&quot;&gt;&lt;/div&gt;
-        &lt;div class=&quot;sr-days&quot;&gt;Day 1&lt;/div&gt;
-        &lt;div class=&quot;sr-topic&quot;&gt;Medicine — Chapter: Cardiology basics&lt;/div&gt;
-        &lt;div class=&quot;sr-due&quot;&gt;DUE TODAY&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;sr-row&quot;&gt;
-        &lt;div class=&quot;sr-dot&quot; style=&quot;background:var(--yellow)&quot;&gt;&lt;/div&gt;
-        &lt;div class=&quot;sr-days&quot;&gt;Day 3&lt;/div&gt;
-        &lt;div class=&quot;sr-topic&quot;&gt;Surgery — Revision video batch 1&lt;/div&gt;
-        &lt;div class=&quot;sr-due&quot;&gt;DUE TODAY&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;sr-row&quot;&gt;
-        &lt;div class=&quot;sr-dot&quot; style=&quot;background:var(--accent2)&quot;&gt;&lt;/div&gt;
-        &lt;div class=&quot;sr-days&quot;&gt;Day 7&lt;/div&gt;
-        &lt;div class=&quot;sr-topic&quot;&gt;OBG — Revision video batch 2&lt;/div&gt;
-        &lt;div class=&quot;sr-due&quot;&gt;In 3 days&lt;/div&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+    <!-- SR log -->
+    <div class="flex-between" style="margin-bottom:10px">
+      <div style="font-size:13px;font-weight:600">Due for Revision Today</div>
+      <button class="btn btn-outline" style="font-size:11px;padding:6px 12px" onclick="addSRTopic()">+ Add Topic</button>
+    </div>
+    <div id="sr-list">
+      <div class="sr-row">
+        <div class="sr-dot" style="background:var(--red)"></div>
+        <div class="sr-days">Day 1</div>
+        <div class="sr-topic">Medicine — Chapter: Cardiology basics</div>
+        <div class="sr-due">DUE TODAY</div>
+      </div>
+      <div class="sr-row">
+        <div class="sr-dot" style="background:var(--yellow)"></div>
+        <div class="sr-days">Day 3</div>
+        <div class="sr-topic">Surgery — Revision video batch 1</div>
+        <div class="sr-due">DUE TODAY</div>
+      </div>
+      <div class="sr-row">
+        <div class="sr-dot" style="background:var(--accent2)"></div>
+        <div class="sr-days">Day 7</div>
+        <div class="sr-topic">OBG — Revision video batch 2</div>
+        <div class="sr-due">In 3 days</div>
+      </div>
+    </div>
+  </div>
 
-  &lt;div class=&quot;card&quot; style=&quot;margin-bottom:16px&quot;&gt;
-    &lt;div class=&quot;card-title&quot;&gt;❌ Wrong Question Notebook&lt;/div&gt;
-    &lt;table class=&quot;tbl&quot;&gt;
-      &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Date&lt;/th&gt;&lt;th&gt;Subject&lt;/th&gt;&lt;th&gt;Topic&lt;/th&gt;&lt;th&gt;Mistake Type&lt;/th&gt;&lt;th&gt;SR Due&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
-      &lt;tbody id=&quot;wq-tbody&quot;&gt;
-        &lt;!-- Rendered by JS --&gt;
-      &lt;/tbody&gt;
-    &lt;/table&gt;
-    &lt;div style=&quot;margin-top:12px;display:flex;gap:8px;flex-wrap:wrap&quot;&gt;
-      &lt;input type=&quot;text&quot; placeholder=&quot;Subject&quot; id=&quot;wq-sub&quot; style=&quot;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:110px&quot;&gt;
-      &lt;input type=&quot;text&quot; placeholder=&quot;Topic&quot; id=&quot;wq-topic&quot; style=&quot;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:140px&quot;&gt;
-      &lt;input type=&quot;text&quot; placeholder=&quot;Mistake type&quot; id=&quot;wq-mistake&quot; style=&quot;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:130px&quot;&gt;
-      &lt;button class=&quot;btn btn-primary&quot; onclick=&quot;addWQ()&quot; style=&quot;font-size:13px;padding:8px 16px&quot;&gt;Log&lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">❌ Wrong Question Notebook</div>
+    <table class="tbl">
+      <thead><tr><th>Date</th><th>Subject</th><th>Topic</th><th>Mistake Type</th><th>SR Due</th></tr></thead>
+      <tbody id="wq-tbody">
+        <tr><td colspan="5" style="text-align:center;color:var(--muted);padding:20px">No entries yet — add from daily log</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+      <input type="text" placeholder="Subject" id="wq-sub" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:110px">
+      <input type="text" placeholder="Topic" id="wq-topic" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:140px">
+      <input type="text" placeholder="Mistake type" id="wq-mistake" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:130px">
+      <button class="btn btn-primary" onclick="addWQ()" style="font-size:13px;padding:8px 16px">Log</button>
+    </div>
+  </div>
+</div>
 
-&lt;!-- ══════════════════ NOTION PASTE PAGE ══════════════════ --&gt;
-&lt;div class=&quot;page&quot; id=&quot;page-notion&quot;&gt;
-  &lt;div class=&quot;intro-banner&quot;&gt;
-    &lt;h2&gt;📋 Copy-Paste Into Notion&lt;/h2&gt;
-    &lt;p&gt;Below are ready-to-paste checklists for Notion. Each block can be pasted directly into any Notion page.&lt;/p&gt;
-    &lt;div class=&quot;quote&quot;&gt;💡 To paste in Notion: Open any page → Click empty area → Paste (Ctrl+V / Cmd+V). Notion auto-formats checkboxes and bullet points.&lt;/div&gt;
-  &lt;/div&gt;
+<!-- ══════════════════ NOTION PASTE PAGE ══════════════════ -->
+<div class="page" id="page-notion">
+  <div class="intro-banner">
+    <h2>📋 Copy-Paste Into Notion</h2>
+    <p>Below are ready-to-paste checklists for Notion. Each block can be pasted directly into any Notion page.</p>
+    <div class="quote">💡 To paste in Notion: Open any page → Click empty area → Paste (Ctrl+V / Cmd+V). Notion auto-formats checkboxes and bullet points.</div>
+  </div>
 
-  &lt;div class=&quot;card&quot; style=&quot;margin-bottom:16px&quot;&gt;
-    &lt;div class=&quot;card-title&quot;&gt;☑ WEEKDAY DAILY CHECKLIST (Mon–Sat)&lt;/div&gt;
-    &lt;div class=&quot;notion-box&quot; id=&quot;notion-weekday&quot;&gt;&lt;/div&gt;
-    &lt;button class=&quot;copy-btn&quot; onclick=&quot;copyNotion('notion-weekday')&quot;&gt;📋 Copy to Clipboard&lt;/button&gt;
-  &lt;/div&gt;
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">☑ WEEKDAY DAILY CHECKLIST (Mon–Sat)</div>
+    <div class="notion-box" id="notion-weekday"></div>
+    <button class="copy-btn" onclick="copyNotion('notion-weekday')">📋 Copy to Clipboard</button>
+  </div>
 
-  &lt;div class=&quot;card&quot; style=&quot;margin-bottom:16px&quot;&gt;
-    &lt;div class=&quot;card-title&quot;&gt;☀️ SUNDAY CHECKLIST&lt;/div&gt;
-    &lt;div class=&quot;notion-box&quot; id=&quot;notion-sunday&quot;&gt;&lt;/div&gt;
-    &lt;button class=&quot;copy-btn&quot; onclick=&quot;copyNotion('notion-sunday')&quot;&gt;📋 Copy to Clipboard&lt;/button&gt;
-  &lt;/div&gt;
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">☀️ SUNDAY CHECKLIST</div>
+    <div class="notion-box" id="notion-sunday"></div>
+    <button class="copy-btn" onclick="copyNotion('notion-sunday')">📋 Copy to Clipboard</button>
+  </div>
 
-  &lt;div class=&quot;card&quot; style=&quot;margin-bottom:16px&quot;&gt;
-    &lt;div class=&quot;card-title&quot;&gt;📅 END-OF-MONTH CHECKLIST + SPACED REPETITION&lt;/div&gt;
-    &lt;div class=&quot;notion-box&quot; id=&quot;notion-monthly&quot;&gt;&lt;/div&gt;
-    &lt;button class=&quot;copy-btn&quot; onclick=&quot;copyNotion('notion-monthly')&quot;&gt;📋 Copy to Clipboard&lt;/button&gt;
-  &lt;/div&gt;
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">📅 END-OF-MONTH CHECKLIST + SPACED REPETITION</div>
+    <div class="notion-box" id="notion-monthly"></div>
+    <button class="copy-btn" onclick="copyNotion('notion-monthly')">📋 Copy to Clipboard</button>
+  </div>
 
-  &lt;div class=&quot;card&quot; style=&quot;margin-bottom:16px&quot;&gt;
-    &lt;div class=&quot;card-title&quot;&gt;🎯 GT DAY CHECKLIST&lt;/div&gt;
-    &lt;div class=&quot;notion-box&quot; id=&quot;notion-gt&quot;&gt;&lt;/div&gt;
-    &lt;button class=&quot;copy-btn&quot; onclick=&quot;copyNotion('notion-gt')&quot;&gt;📋 Copy to Clipboard&lt;/button&gt;
-  &lt;/div&gt;
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">🎯 GT DAY CHECKLIST</div>
+    <div class="notion-box" id="notion-gt"></div>
+    <button class="copy-btn" onclick="copyNotion('notion-gt')">📋 Copy to Clipboard</button>
+  </div>
 
-  &lt;div class=&quot;card&quot; style=&quot;margin-bottom:16px&quot;&gt;
-    &lt;div class=&quot;card-title&quot;&gt;🔁 SPACED REPETITION TRACKER TEMPLATE&lt;/div&gt;
-    &lt;div class=&quot;notion-box&quot; id=&quot;notion-sr&quot;&gt;&lt;/div&gt;
-    &lt;button class=&quot;copy-btn&quot; onclick=&quot;copyNotion('notion-sr')&quot;&gt;📋 Copy to Clipboard&lt;/button&gt;
-  &lt;/div&gt;
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">🔁 SPACED REPETITION TRACKER TEMPLATE</div>
+    <div class="notion-box" id="notion-sr"></div>
+    <button class="copy-btn" onclick="copyNotion('notion-sr')">📋 Copy to Clipboard</button>
+  </div>
 
-  &lt;!-- Publish guide --&gt;
-  &lt;div class=&quot;card&quot; style=&quot;border-color:rgba(108,99,255,.4)&quot;&gt;
-    &lt;div class=&quot;card-title&quot; style=&quot;color:var(--accent2)&quot;&gt;🌐 How to Publish This as a Website (iPad &amp; Computer)&lt;/div&gt;
-    &lt;div style=&quot;font-size:13px;line-height:2;color:var(--muted)&quot;&gt;
-      &lt;div style=&quot;margin-bottom:16px&quot;&gt;
-        &lt;div style=&quot;color:var(--text);font-weight:600;margin-bottom:8px&quot;&gt;Option 1: Publish via Notion (Easiest — 2 minutes)&lt;/div&gt;
-        1. Open Notion on your iPad or computer&lt;br&gt;
-        2. Create a new page → paste your checklists in&lt;br&gt;
-        3. Click the &lt;b style=&quot;color:var(--text)&quot;&gt;Share&lt;/b&gt; button (top right)&lt;br&gt;
-        4. Toggle &lt;b style=&quot;color:var(--text)&quot;&gt;&quot;Share to web&quot;&lt;/b&gt; ON&lt;br&gt;
-        5. Click &lt;b style=&quot;color:var(--text)&quot;&gt;&quot;Copy link&quot;&lt;/b&gt; → that's your website URL!&lt;br&gt;
-        6. Open that link on any browser — it works on iPad, phone, and computer&lt;br&gt;
-        &lt;br&gt;
-        &lt;span style=&quot;color:var(--green)&quot;&gt;✅ Free, no coding needed, updates live as you edit&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div style=&quot;margin-bottom:16px&quot;&gt;
-        &lt;div style=&quot;color:var(--text);font-weight:600;margin-bottom:8px&quot;&gt;Option 2: Host This HTML File Free (GitHub Pages)&lt;/div&gt;
-        1. Go to &lt;b style=&quot;color:var(--text)&quot;&gt;github.com&lt;/b&gt; → Create free account&lt;br&gt;
-        2. Click &lt;b style=&quot;color:var(--text)&quot;&gt;&quot;New repository&quot;&lt;/b&gt; → Name it &lt;code style=&quot;color:var(--accent2)&quot;&gt;neet-dashboard&lt;/code&gt;&lt;br&gt;
-        3. Upload this HTML file as &lt;code style=&quot;color:var(--accent2)&quot;&gt;index.html&lt;/code&gt;&lt;br&gt;
-        4. Go to Settings → Pages → Source: main branch → Save&lt;br&gt;
-        5. Your site will be live at &lt;code style=&quot;color:var(--accent2)&quot;&gt;yourusername.github.io/neet-dashboard&lt;/code&gt;&lt;br&gt;
-        &lt;br&gt;
-        &lt;span style=&quot;color:var(--green)&quot;&gt;✅ Free forever, works on all devices, shareable link&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-        &lt;div style=&quot;color:var(--text);font-weight:600;margin-bottom:8px&quot;&gt;Option 3: Save to iPad Home Screen (App-like Experience)&lt;/div&gt;
-        1. Download this HTML file to your iPad&lt;br&gt;
-        2. Open it in &lt;b style=&quot;color:var(--text)&quot;&gt;Safari&lt;/b&gt;&lt;br&gt;
-        3. Tap the &lt;b style=&quot;color:var(--text)&quot;&gt;Share icon&lt;/b&gt; → &lt;b style=&quot;color:var(--text)&quot;&gt;&quot;Add to Home Screen&quot;&lt;/b&gt;&lt;br&gt;
-        4. It opens like an app with no browser bar!&lt;br&gt;
-        &lt;br&gt;
-        &lt;span style=&quot;color:var(--green)&quot;&gt;✅ Works offline, feels like a native app&lt;/span&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
+  <!-- Publish guide -->
+  <div class="card" style="border-color:rgba(108,99,255,.4)">
+    <div class="card-title" style="color:var(--accent2)">🌐 How to Publish This as a Website (iPad & Computer)</div>
+    <div style="font-size:13px;line-height:2;color:var(--muted)">
+      <div style="margin-bottom:16px">
+        <div style="color:var(--text);font-weight:600;margin-bottom:8px">Option 1: Publish via Notion (Easiest — 2 minutes)</div>
+        1. Open Notion on your iPad or computer<br>
+        2. Create a new page → paste your checklists in<br>
+        3. Click the <b style="color:var(--text)">Share</b> button (top right)<br>
+        4. Toggle <b style="color:var(--text)">"Share to web"</b> ON<br>
+        5. Click <b style="color:var(--text)">"Copy link"</b> → that's your website URL!<br>
+        6. Open that link on any browser — it works on iPad, phone, and computer<br>
+        <br>
+        <span style="color:var(--green)">✅ Free, no coding needed, updates live as you edit</span>
+      </div>
+      <div style="margin-bottom:16px">
+        <div style="color:var(--text);font-weight:600;margin-bottom:8px">Option 2: Host This HTML File Free (GitHub Pages)</div>
+        1. Go to <b style="color:var(--text)">github.com</b> → Create free account<br>
+        2. Click <b style="color:var(--text)">"New repository"</b> → Name it <code style="color:var(--accent2)">neet-dashboard</code><br>
+        3. Upload this HTML file as <code style="color:var(--accent2)">index.html</code><br>
+        4. Go to Settings → Pages → Source: main branch → Save<br>
+        5. Your site will be live at <code style="color:var(--accent2)">yourusername.github.io/neet-dashboard</code><br>
+        <br>
+        <span style="color:var(--green)">✅ Free forever, works on all devices, shareable link</span>
+      </div>
+      <div>
+        <div style="color:var(--text);font-weight:600;margin-bottom:8px">Option 3: Save to iPad Home Screen (App-like Experience)</div>
+        1. Download this HTML file to your iPad<br>
+        2. Open it in <b style="color:var(--text)">Safari</b><br>
+        3. Tap the <b style="color:var(--text)">Share icon</b> → <b style="color:var(--text)">"Add to Home Screen"</b><br>
+        4. It opens like an app with no browser bar!<br>
+        <br>
+        <span style="color:var(--green)">✅ Works offline, feels like a native app</span>
+      </div>
+    </div>
+  </div>
+</div>
 
-&lt;script&gt;
+<script>
 // ── DATE ──
 const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const now = new Date();
@@ -777,49 +764,25 @@ document.getElementById('live-date').textContent = now.toLocaleDateString('en-IN
 
 // ── PAGE NAV ──
 function showPage(id){
-  document.querySelectorAll('.page').forEach(p=&gt;p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=&gt;t.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   event.target.classList.add('active');
   if(id==='notion') populateNotion();
 }
 
 // ── CHECKLIST TOGGLE ──
-const savedChecks = JSON.parse(localStorage.getItem('checklists') || '{}');
-
-// Apply saved states on page load
-document.querySelectorAll('.check-item').forEach((el, index) =&gt; {
-  el.setAttribute('data-index', index); // Assign a unique index to each item
-  if (savedChecks['check_' + index]) {
-    el.classList.add('done');
-  }
-});
-// Ensure the task count is accurate on load
-setTimeout(updateTaskCount, 100); 
-
 function toggleCheck(el){
   el.classList.toggle('done');
-  const index = el.getAttribute('data-index');
-  // Save the new state to Local Storage
-  savedChecks['check_' + index] = el.classList.contains('done');
-  localStorage.setItem('checklists', JSON.stringify(savedChecks));
-  
   updateTaskCount();
 }
-
 function updateTaskCount(){
   const total = document.querySelectorAll('#check-list .check-item').length;
   const done = document.querySelectorAll('#check-list .check-item.done').length;
-  document.getElementById('tasks-done').textContent = done + '/' + total;
+  document.getElementById('tasks-done').textContent = done+'/'+total;
 }
-
 function resetChecklist(){
-  document.querySelectorAll('.check-item').forEach((el) =&gt; {
-    el.classList.remove('done');
-    const index = el.getAttribute('data-index');
-    savedChecks['check_' + index] = false;
-  });
-  localStorage.setItem('checklists', JSON.stringify(savedChecks));
+  document.querySelectorAll('.check-item').forEach(el=>el.classList.remove('done'));
   updateTaskCount();
 }
 
@@ -831,8 +794,8 @@ function setTimer(min){ clearInterval(timerInterval); timerRunning=false; timerS
 function startTimer(){
   if(timerRunning) return;
   timerRunning=true;
-  timerInterval=setInterval(()=&gt;{
-    if(timerSeconds&lt;=0){ clearInterval(timerInterval); timerRunning=false; alert('⏰ Session complete!'); return; }
+  timerInterval=setInterval(()=>{
+    if(timerSeconds<=0){ clearInterval(timerInterval); timerRunning=false; alert('⏰ Session complete!'); return; }
     timerSeconds--; updateTimerDisplay();
   },1000);
 }
@@ -845,19 +808,19 @@ function buildStreakGrid(){
   const grid = document.getElementById('streak-grid');
   grid.innerHTML='';
   const today = new Date();
-  for(let i=29;i&gt;=0;i--){
+  for(let i=29;i>=0;i--){
     const d = new Date(today); d.setDate(today.getDate()-i);
     const key = d.toISOString().slice(0,10);
     const div = document.createElement('div');
     div.className = 'streak-day' + (i===0?' today':streakData[key]?' done':'');
     div.title = key;
-    div.onclick=()=&gt;{ streakData[key]=!streakData[key]; localStorage.setItem('streak',JSON.stringify(streakData)); buildStreakGrid(); updateStreak(); };
+    div.onclick=()=>{ streakData[key]=!streakData[key]; localStorage.setItem('streak',JSON.stringify(streakData)); buildStreakGrid(); updateStreak(); };
     grid.appendChild(div);
   }
 }
 function updateStreak(){
   let streak=0; const today=new Date();
-  for(let i=0;i&lt;365;i++){
+  for(let i=0;i<365;i++){
     const d=new Date(today); d.setDate(today.getDate()-i);
     if(streakData[d.toISOString().slice(0,10)]) streak++; else break;
   }
@@ -871,15 +834,15 @@ const habitData = JSON.parse(localStorage.getItem('habits')||'{}');
 function buildHabits(){
   const container = document.getElementById('habit-grid');
   container.innerHTML='';
-  habits.forEach(h=&gt;{
+  habits.forEach(h=>{
     const row = document.createElement('div'); row.className='habit-row';
     const name = document.createElement('div'); name.className='habit-name'; name.textContent=h;
     const days = document.createElement('div'); days.className='habit-days';
-    for(let d=0;d&lt;7;d++){
+    for(let d=0;d<7;d++){
       const key=h+'_'+d;
       const cell = document.createElement('div'); cell.className='hday'+(habitData[key]?' done':'');
       cell.textContent=habitData[key]?'✓':'';
-      cell.onclick=()=&gt;{ habitData[key]=!habitData[key]; localStorage.setItem('habits',JSON.stringify(habitData)); buildHabits(); };
+      cell.onclick=()=>{ habitData[key]=!habitData[key]; localStorage.setItem('habits',JSON.stringify(habitData)); buildHabits(); };
       days.appendChild(cell);
     }
     row.appendChild(name); row.appendChild(days); container.appendChild(row);
@@ -917,7 +880,7 @@ function logMCQ(){
   const correct=parseInt(document.getElementById('mcq-correct').value||0);
   mcqTotal+=done; mcqCorrectTotal+=correct;
   localStorage.setItem('mcqTotal',mcqTotal); localStorage.setItem('mcqCorrect',mcqCorrectTotal);
-  const acc=mcqTotal&gt;0?Math.round(mcqCorrectTotal/mcqTotal*100):0;
+  const acc=mcqTotal>0?Math.round(mcqCorrectTotal/mcqTotal*100):0;
   document.getElementById('mcq-done').textContent=mcqTotal;
   document.getElementById('mcq-total').textContent=mcqTotal;
   document.getElementById('mcq-acc').textContent=acc+'%';
@@ -926,100 +889,45 @@ function logMCQ(){
 }
 
 // ── WEEKLY ──
-// Load saved inputs on startup
-document.getElementById('wk-lec-input').value = localStorage.getItem('wkLec') || '';
-document.getElementById('wk-mcq-input').value = localStorage.getItem('wkMcq') || '';
-setTimeout(updateWeekly, 100);
-
 function updateWeekly(){
-  const lecInp = document.getElementById('wk-lec-input').value;
-  const mcqInp = document.getElementById('wk-mcq-input').value;
-  
-  // Save to Local Storage
-  localStorage.setItem('wkLec', lecInp);
-  localStorage.setItem('wkMcq', mcqInp);
-
-  const lec = parseInt(lecInp || 0);
-  const mcq = parseInt(mcqInp || 0);
-  const lecPct = Math.min(100, Math.round(lec / 18 * 100));
-  const mcqPct = Math.min(100, Math.round(mcq / 350 * 100));
-  
-  document.getElementById('wk-lec-pct').textContent = lecPct + '%';
-  document.getElementById('wk-lec-bar').style.width = lecPct + '%';
-  document.getElementById('wk-mcq-pct').textContent = mcqPct + '%';
-  document.getElementById('wk-mcq-bar').style.width = mcqPct + '%';
+  const lec=parseInt(document.getElementById('wk-lec-input').value||0);
+  const mcq=parseInt(document.getElementById('wk-mcq-input').value||0);
+  const lecPct=Math.min(100,Math.round(lec/18*100));
+  const mcqPct=Math.min(100,Math.round(mcq/350*100));
+  document.getElementById('wk-lec-pct').textContent=lecPct+'%';
+  document.getElementById('wk-lec-bar').style.width=lecPct+'%';
+  document.getElementById('wk-mcq-pct').textContent=mcqPct+'%';
+  document.getElementById('wk-mcq-bar').style.width=mcqPct+'%';
 }
 
 // ── GT TRACKER ──
-let gtData = JSON.parse(localStorage.getItem('gtData') || '[]');
-
-function renderGT() {
-  const tbody = document.getElementById('gt-tbody');
-  // Keep the default upcoming rows
-  tbody.innerHTML = `
-    &lt;tr&gt;&lt;td&gt;GT 1&lt;/td&gt;&lt;td&gt;Month 1, 7th&lt;/td&gt;&lt;td&gt;—&lt;/td&gt;&lt;td&gt;—&lt;/td&gt;&lt;td&gt;—&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge badge-todo&quot;&gt;Upcoming&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
-    &lt;tr&gt;&lt;td&gt;GT 2&lt;/td&gt;&lt;td&gt;Month 1, 17th&lt;/td&gt;&lt;td&gt;—&lt;/td&gt;&lt;td&gt;—&lt;/td&gt;&lt;td&gt;—&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge badge-todo&quot;&gt;Upcoming&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
-  `;
-  // Render saved rows
-  gtData.forEach((gt, index) =&gt; {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `&lt;td&gt;GT ${index + 3}&lt;/td&gt;&lt;td&gt;${gt.date}&lt;/td&gt;&lt;td style=&quot;color:var(--accent2);font-weight:700&quot;&gt;${gt.score}&lt;/td&gt;&lt;td&gt;—&lt;/td&gt;&lt;td&gt;${gt.weak||'—'}&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge badge-done&quot;&gt;Done&lt;/span&gt;&lt;/td&gt;`;
-    tbody.appendChild(tr);
-  });
-}
-renderGT(); // Call on load
-
+let gtCount=2;
 function addGT(){
-  const date = document.getElementById('gt-date').value;
-  const score = document.getElementById('gt-score').value;
-  const weak = document.getElementById('gt-weak').value;
-  if(!date || !score) return;
-  
-  // Push to array and save
-  gtData.push({date, score, weak});
-  localStorage.setItem('gtData', JSON.stringify(gtData));
-  
-  renderGT();
-  
-  document.getElementById('gt-date').value=''; 
-  document.getElementById('gt-score').value=''; 
-  document.getElementById('gt-weak').value='';
+  const date=document.getElementById('gt-date').value;
+  const score=document.getElementById('gt-score').value;
+  const weak=document.getElementById('gt-weak').value;
+  if(!date||!score) return;
+  gtCount++;
+  const tbody=document.getElementById('gt-tbody');
+  const tr=document.createElement('tr');
+  tr.innerHTML=`<td>GT ${gtCount}</td><td>${date}</td><td style="color:var(--accent2);font-weight:700">${score}</td><td>—</td><td>${weak||'—'}</td><td><span class="badge badge-done">Done</span></td>`;
+  tbody.appendChild(tr);
+  document.getElementById('gt-date').value=''; document.getElementById('gt-score').value=''; document.getElementById('gt-weak').value='';
 }
 
 // ── WRONG NOTEBOOK ──
-let wqData = JSON.parse(localStorage.getItem('wqData') || '[]');
-
-function renderWQ() {
-  const tbody = document.getElementById('wq-tbody');
-  if(wqData.length === 0) {
-    tbody.innerHTML = `&lt;tr&gt;&lt;td colspan=&quot;5&quot; style=&quot;text-align:center;color:var(--muted);padding:20px&quot;&gt;No entries yet — add from daily log&lt;/td&gt;&lt;/tr&gt;`;
-    return;
-  }
-  tbody.innerHTML = '';
-  wqData.forEach(wq =&gt; {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `&lt;td&gt;${wq.date}&lt;/td&gt;&lt;td&gt;${wq.sub}&lt;/td&gt;&lt;td&gt;${wq.topic}&lt;/td&gt;&lt;td&gt;${wq.mistake||'Conceptual'}&lt;/td&gt;&lt;td style=&quot;color:var(--yellow)&quot;&gt;+1 day&lt;/td&gt;`;
-    tbody.appendChild(tr);
-  });
-}
-renderWQ(); // Call on load
-
 function addWQ(){
-  const sub = document.getElementById('wq-sub').value;
-  const topic = document.getElementById('wq-topic').value;
-  const mistake = document.getElementById('wq-mistake').value;
-  if(!sub || !topic) return;
-  
-  const today = new Date().toLocaleDateString('en-IN');
-  
-  wqData.push({date: today, sub, topic, mistake});
-  localStorage.setItem('wqData', JSON.stringify(wqData));
-  
-  renderWQ();
-  
-  document.getElementById('wq-sub').value=''; 
-  document.getElementById('wq-topic').value=''; 
-  document.getElementById('wq-mistake').value='';
+  const sub=document.getElementById('wq-sub').value;
+  const topic=document.getElementById('wq-topic').value;
+  const mistake=document.getElementById('wq-mistake').value;
+  if(!sub||!topic) return;
+  const tbody=document.getElementById('wq-tbody');
+  if(tbody.querySelector('td[colspan]')) tbody.innerHTML='';
+  const tr=document.createElement('tr');
+  const today=new Date().toLocaleDateString('en-IN');
+  tr.innerHTML=`<td>${today}</td><td>${sub}</td><td>${topic}</td><td>${mistake||'Conceptual'}</td><td style="color:var(--yellow)">+1 day</td>`;
+  tbody.appendChild(tr);
+  document.getElementById('wq-sub').value=''; document.getElementById('wq-topic').value=''; document.getElementById('wq-mistake').value='';
 }
 
 // ── SR ADD ──
@@ -1027,7 +935,7 @@ function addSRTopic(){
   const topic=prompt('Enter topic name:'); if(!topic) return;
   const list=document.getElementById('sr-list');
   const row=document.createElement('div'); row.className='sr-row';
-  row.innerHTML=`&lt;div class=&quot;sr-dot&quot; style=&quot;background:var(--red)&quot;&gt;&lt;/div&gt;&lt;div class=&quot;sr-days&quot;&gt;Day 1&lt;/div&gt;&lt;div class=&quot;sr-topic&quot;&gt;${topic}&lt;/div&gt;&lt;div class=&quot;sr-due&quot;&gt;DUE TODAY&lt;/div&gt;`;
+  row.innerHTML=`<div class="sr-dot" style="background:var(--red)"></div><div class="sr-days">Day 1</div><div class="sr-topic">${topic}</div><div class="sr-due">DUE TODAY</div>`;
   list.prepend(row);
 }
 
@@ -1071,7 +979,7 @@ SR Topics Revised: ✅ / ❌
 Study Hours Today: __ hrs`;
 
   document.getElementById('notion-sunday').textContent = `# ☀️ Sunday Checklist — Rest + Revision Day
-&gt; No new lectures today. Focus on consolidation.
+> No new lectures today. Focus on consolidation.
 
 ## Morning
 ☐ ❓ 50 MCQs — mixed subjects (no time pressure)
@@ -1115,7 +1023,7 @@ Weekly review complete: ✅ / ❌`;
 ☐ All Day-3 topics covered? ✅ / ❌
 ☐ All Day-7 topics covered? ✅ / ❌
 ☐ All Day-15 topics covered? ✅ / ❌
-☐ All Day-30 topics — mark as &quot;Consolidated&quot; ✅
+☐ All Day-30 topics — mark as "Consolidated" ✅
 
 ## 📖 Subject Revision Status
 ☐ Surgery — Marrow revision done this month? ✅ / ❌
@@ -1147,7 +1055,7 @@ Weekly review complete: ✅ / ❌`;
 ☐ Any subject to intensify: __`;
 
   document.getElementById('notion-gt').textContent = `# 🎯 Grand Test Day Checklist
-&gt; Date: ___  |  GT Number: ___
+> Date: ___  |  GT Number: ___
 
 ## Before the Test
 ☐ Light breakfast, water ready
@@ -1164,7 +1072,7 @@ Weekly review complete: ✅ / ❌`;
 ☐ 📊 Subject-wise breakdown:
    Medicine: __  Surgery: __  PSM: __  OBG: __  ENT: __  Forensic: __
 ☐ ❌ List all wrong answers (min top 20 mistakes)
-☐ 🔴 Tag weak subjects (scored &lt;50%)
+☐ 🔴 Tag weak subjects (scored <50%)
 ☐ 📝 Create follow-up revision tasks for next 7 days
 
 ## Action Tasks Created from GT
@@ -1176,7 +1084,7 @@ Weekly review complete: ✅ / ❌`;
 ☐ Add all GT mistakes to Wrong Question Notebook ✅`;
 
   document.getElementById('notion-sr').textContent = `# 🔁 Spaced Repetition Tracker — 1-3-7-15-30 System
-&gt; Paste this into your Notion calendar for every new lecture batch
+> Paste this into your Notion calendar for every new lecture batch
 
 ## How it Works
 When you finish a topic or lecture batch — note the date.
@@ -1213,9 +1121,9 @@ Then revise on: Day+1, Day+3, Day+7, Day+15, Day+30.
 // ── COPY ──
 function copyNotion(id){
   const text=document.getElementById(id).textContent;
-  navigator.clipboard.writeText(text).then(()=&gt;{
+  navigator.clipboard.writeText(text).then(()=>{
     const btn=event.target; btn.textContent='✅ Copied!';
-    setTimeout(()=&gt;btn.textContent='📋 Copy to Clipboard',2000);
+    setTimeout(()=>btn.textContent='📋 Copy to Clipboard',2000);
   });
 }
 
@@ -1225,8 +1133,6 @@ if(now.getDay()===0){
   document.getElementById('day-type').textContent='Sunday';
   document.getElementById('day-type').className='chip chip-yellow';
 }
-&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</pre>
+</script>
 </body>
 </html>
