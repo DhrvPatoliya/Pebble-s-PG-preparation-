@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEET PG 2028 — Study Command Centre</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root {
+    --bg: #0e0f13;
+    --surface: #16181f;
+    --surface2: #1e2028;
+    --border: #2a2d38;
+    --accent: #6c63ff;
+    --accent2: #a78bfa;
+    --green: #22c55e;
+    --yellow: #f59e0b;
+    --red: #ef4444;
+    --blue: #3b82f6;
+    --teal: #14b8a6;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(14,15,19,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 24px;
+  }
+  .nav-logo { font-weight: 700; font-size: 15px; letter-spacing: -0.3px; }
+  .nav-logo span { color: var(--accent2); }
+  .nav-tabs { display: flex; gap: 4px; }
+  .tab {
+    padding: 6px 14px; border-radius: 6px; cursor: pointer;
+    font-size: 13px; font-weight: 500; color: var(--muted);
+    border: none; background: none; transition: all .2s;
+  }
+  .tab.active, .tab:hover { background: var(--surface2); color: var(--text); }
+  .tab.active { color: var(--accent2); }
+  .nav-date { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+
+  /* ── MAIN LAYOUT ── */
+  .page { display: none; padding: 24px; max-width: 1200px; margin: 0 auto; }
+  .page.active { display: block; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px;
+  }
+  .card-title {
+    font-size: 11px; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 16px;
+  }
+
+  /* ── GRID ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+  .col-span-2 { grid-column: span 2; }
+  .col-span-3 { grid-column: span 3; }
+
+  /* ── STAT PILL ── */
+  .stat-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+  .stat {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 18px; flex: 1; min-width: 120px;
+  }
+  .stat-val { font-family: var(--mono); font-size: 22px; font-weight: 600; }
+  .stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .stat.green .stat-val { color: var(--green); }
+  .stat.purple .stat-val { color: var(--accent2); }
+  .stat.yellow .stat-val { color: var(--yellow); }
+  .stat.blue .stat-val { color: var(--blue); }
+  .stat.teal .stat-val { color: var(--teal); }
+
+  /* ── PROGRESS BAR ── */
+  .prog-wrap { margin-bottom: 12px; }
+  .prog-header { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px; }
+  .prog-pct { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .prog-track {
+    height: 7px; background: var(--surface2); border-radius: 99px; overflow: hidden;
+  }
+  .prog-fill {
+    height: 100%; border-radius: 99px; transition: width .6s ease;
+  }
+  .fill-purple { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+  .fill-green { background: var(--green); }
+  .fill-yellow { background: var(--yellow); }
+  .fill-blue { background: var(--blue); }
+  .fill-teal { background: var(--teal); }
+  .fill-red { background: var(--red); }
+
+  /* ── CHECKLIST ── */
+  .checklist { list-style: none; }
+  .check-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 0; border-bottom: 1px solid var(--border);
+    cursor: pointer;
+  }
+  .check-item:last-child { border-bottom: none; }
+  .check-box {
+    width: 18px; height: 18px; border: 2px solid var(--border);
+    border-radius: 4px; flex-shrink: 0; margin-top: 2px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .15s; background: transparent;
+  }
+  .check-item.done .check-box {
+    background: var(--accent); border-color: var(--accent);
+  }
+  .check-item.done .check-box::after { content: '✓'; font-size: 11px; color: #fff; }
+  .check-item.done .check-label { text-decoration: line-through; color: var(--muted); }
+  .check-label { flex: 1; font-size: 13px; }
+  .check-tag {
+    font-size: 10px; padding: 2px 8px; border-radius: 99px;
+    font-weight: 600; letter-spacing: .3px;
+  }
+  .tag-must { background: rgba(239,68,68,.15); color: var(--red); }
+  .tag-med { background: rgba(108,99,255,.15); color: var(--accent2); }
+  .tag-mcq { background: rgba(245,158,11,.15); color: var(--yellow); }
+  .tag-rev { background: rgba(20,184,166,.15); color: var(--teal); }
+  .tag-gt { background: rgba(59,130,246,.15); color: var(--blue); }
+  .tag-low { background: rgba(100,116,139,.15); color: var(--muted); }
+
+  /* ── SECTION HEADER ── */
+  .sec-header {
+    display: flex; align-items: center; gap: 10px; margin: 24px 0 12px;
+  }
+  .sec-line { flex: 1; height: 1px; background: var(--border); }
+  .sec-label { font-size: 11px; font-weight: 600; letter-spacing: 1px; color: var(--muted); white-space: nowrap; }
+
+  /* ── STREAK ── */
+  .streak-grid { display: flex; gap: 4px; flex-wrap: wrap; }
+  .streak-day {
+    width: 14px; height: 14px; border-radius: 3px; background: var(--surface2);
+  }
+  .streak-day.done { background: var(--accent); }
+  .streak-day.today { background: var(--accent2); box-shadow: 0 0 6px var(--accent2); }
+
+  /* ── TABLE ── */
+  .tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .tbl th {
+    text-align: left; padding: 8px 12px;
+    font-size: 10px; font-weight: 600; letter-spacing: .8px;
+    color: var(--muted); text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+  .tbl td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:hover td { background: var(--surface2); }
+
+  /* ── BADGE ── */
+  .badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 3px 10px; border-radius: 99px; font-size: 11px; font-weight: 600;
+  }
+  .badge-done { background: rgba(34,197,94,.12); color: var(--green); }
+  .badge-prog { background: rgba(108,99,255,.12); color: var(--accent2); }
+  .badge-todo { background: rgba(100,116,139,.12); color: var(--muted); }
+  .badge-warn { background: rgba(245,158,11,.12); color: var(--yellow); }
+
+  /* ── SPACED REP ── */
+  .sr-row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px;
+  }
+  .sr-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .sr-days { font-family: var(--mono); font-size: 11px; color: var(--muted); min-width: 40px; }
+  .sr-topic { flex: 1; }
+  .sr-due { font-family: var(--mono); font-size: 11px; color: var(--yellow); }
+
+  /* ── TIMER ── */
+  .timer-display {
+    font-family: var(--mono); font-size: 56px; font-weight: 600;
+    text-align: center; color: var(--accent2); letter-spacing: -2px;
+    margin: 20px 0;
+  }
+  .timer-btns { display: flex; gap: 10px; justify-content: center; }
+  .btn {
+    padding: 10px 24px; border-radius: 8px; border: none;
+    font-family: var(--sans); font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all .2s;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent2); }
+  .btn-outline { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent2); }
+
+  /* ── HABIT GRID ── */
+  .habit-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 0; border-bottom: 1px solid var(--border);
+  }
+  .habit-name { width: 140px; font-size: 13px; }
+  .habit-days { display: flex; gap: 6px; flex: 1; }
+  .hday {
+    width: 28px; height: 28px; border-radius: 6px;
+    background: var(--surface2); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: var(--muted); cursor: pointer; transition: all .2s;
+  }
+  .hday.done { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 700; }
+
+  /* ── NOTION PASTE BOX ── */
+  .notion-box {
+    background: var(--bg); border: 1px dashed var(--border);
+    border-radius: 10px; padding: 16px; margin-top: 12px;
+    font-family: var(--mono); font-size: 12px; line-height: 1.8;
+    color: var(--muted); white-space: pre-wrap; overflow-x: auto;
+    max-height: 400px; overflow-y: auto;
+  }
+  .copy-btn {
+    margin-top: 8px; padding: 8px 16px; background: var(--surface2);
+    border: 1px solid var(--border); border-radius: 6px; color: var(--text);
+    font-size: 12px; cursor: pointer; transition: all .2s; font-family: var(--sans);
+  }
+  .copy-btn:hover { border-color: var(--accent); color: var(--accent2); }
+
+  /* ── GT CARD ── */
+  .gt-entry { padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .gt-meta { display: flex; gap: 12px; align-items: center; margin-bottom: 6px; }
+  .gt-score { font-family: var(--mono); font-size: 18px; font-weight: 700; color: var(--accent2); }
+  .gt-date { font-size: 12px; color: var(--muted); }
+  .gt-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  /* ── MOBILE ── */
+  @media(max-width: 768px){
+    nav { padding: 10px 14px; }
+    .nav-date { display: none; }
+    .nav-tabs { gap: 2px; }
+    .tab { padding: 6px 8px; font-size: 11px; }
+    .page { padding: 14px; }
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .col-span-2, .col-span-3 { grid-column: span 1; }
+    .stat-row { gap: 8px; }
+    .stat { padding: 12px 14px; }
+    .timer-display { font-size: 40px; }
+    .habit-name { width: 100px; font-size: 12px; }
+  }
+
+  /* ── HELPERS ── */
+  .mt8 { margin-top: 8px; }
+  .mt16 { margin-top: 16px; }
+  .mt20 { margin-top: 20px; }
+  .flex-between { display: flex; justify-content: space-between; align-items: center; }
+  .chip {
+    display: inline-block; padding: 2px 10px; border-radius: 99px;
+    font-size: 11px; font-weight: 600;
+  }
+  .chip-green { background: rgba(34,197,94,.1); color: var(--green); }
+  .chip-purple { background: rgba(167,139,250,.1); color: var(--accent2); }
+  .chip-yellow { background: rgba(245,158,11,.1); color: var(--yellow); }
+  .chip-red { background: rgba(239,68,68,.1); color: var(--red); }
+
+  .intro-banner {
+    background: linear-gradient(135deg, rgba(108,99,255,.15), rgba(167,139,250,.08));
+    border: 1px solid rgba(108,99,255,.3);
+    border-radius: 12px; padding: 18px 22px; margin-bottom: 20px;
+  }
+  .intro-banner h2 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  .intro-banner p { font-size: 13px; color: var(--muted); }
+  .intro-banner .quote { font-size: 12px; color: var(--accent2); margin-top: 8px; font-style: italic; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">NEET PG <span>2028</span></div>
+  <div class="nav-tabs">
+    <button class="tab active" onclick="showPage('daily')">Daily</button>
+    <button class="tab" onclick="showPage('weekly')">Weekly</button>
+    <button class="tab" onclick="showPage('tracker')">Tracker</button>
+    <button class="tab" onclick="showPage('gt')">GT</button>
+    <button class="tab" onclick="showPage('revision')">Revision</button>
+    <button class="tab" onclick="showPage('notion')">📋 Notion</button>
+  </div>
+  <div class="nav-date" id="live-date"></div>
+</nav>
+
+<!-- ══════════════════ DAILY PAGE ══════════════════ -->
+<div class="page active" id="page-daily">
+
+  <div class="intro-banner">
+    <h2>🧠 Daily Command Centre</h2>
+    <p>3 Medicine lectures · 50 MCQs · Spaced Revision · 7 hrs deep work</p>
+    <div class="quote">"Small daily improvements are the key to staggering long-term results."</div>
+  </div>
+
+  <div class="stat-row">
+    <div class="stat green">
+      <div class="stat-val" id="streak-count">0</div>
+      <div class="stat-label">🔥 Day Streak</div>
+    </div>
+    <div class="stat purple">
+      <div class="stat-val" id="tasks-done">0/8</div>
+      <div class="stat-label">Tasks Today</div>
+    </div>
+    <div class="stat yellow">
+      <div class="stat-val">171</div>
+      <div class="stat-label">Med Lectures Left</div>
+    </div>
+    <div class="stat blue">
+      <div class="stat-val" id="med-done">0</div>
+      <div class="stat-label">Med Done Total</div>
+    </div>
+    <div class="stat teal">
+      <div class="stat-val" id="mcq-total">0</div>
+      <div class="stat-label">MCQs Logged</div>
+    </div>
+  </div>
+
+  <!-- Timer -->
+  <div class="grid-2" style="margin-bottom:16px">
+    <div class="card">
+      <div class="card-title">⏱ Deep Work Timer</div>
+      <div class="timer-display" id="timer">25:00</div>
+      <div class="timer-btns">
+        <button class="btn btn-primary" onclick="startTimer()">Start</button>
+        <button class="btn btn-outline" onclick="pauseTimer()">Pause</button>
+        <button class="btn btn-outline" onclick="resetTimer()">Reset</button>
+      </div>
+      <div style="display:flex;gap:8px;justify-content:center;margin-top:12px">
+        <button class="btn btn-outline" style="font-size:11px;padding:6px 12px" onclick="setTimer(25)">25m Focus</button>
+        <button class="btn btn-outline" style="font-size:11px;padding:6px 12px" onclick="setTimer(50)">50m Deep</button>
+        <button class="btn btn-outline" style="font-size:11px;padding:6px 12px" onclick="setTimer(5)">5m Break</button>
+      </div>
+    </div>
+
+    <!-- Streak visual -->
+    <div class="card">
+      <div class="card-title">📅 Last 30 Days</div>
+      <div class="streak-grid" id="streak-grid"></div>
+      <div style="margin-top:14px;font-size:12px;color:var(--muted)">
+        Click a day to toggle. Purple = today, Violet = completed.
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEKDAY CHECKLIST -->
+  <div class="card" id="checklist-card">
+    <div class="flex-between" style="margin-bottom:16px">
+      <div class="card-title" style="margin-bottom:0">☑ Today's Checklist <span id="day-type" class="chip chip-purple">Weekday</span></div>
+      <button class="btn btn-outline" style="font-size:11px;padding:6px 12px" onclick="resetChecklist()">Reset</button>
+    </div>
+
+    <div id="checklist-weekday">
+      <ul class="checklist" id="check-list">
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📖 Medicine Lecture 1 — watch + notes</span><span class="check-tag tag-must">MUST</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📖 Medicine Lecture 2 — watch + notes</span><span class="check-tag tag-must">MUST</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📖 Medicine Lecture 3 — watch + notes</span><span class="check-tag tag-must">MUST</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">🔁 Immediate revision after each lecture</span><span class="check-tag tag-rev">REVISION</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📚 Low-yield subject slot (today: see tracker)</span><span class="check-tag tag-low">LOW-YIELD</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">❓ 50 MCQs — subject-wise or GT mode</span><span class="check-tag tag-mcq">MCQs</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📅 Spaced revision — check due topics</span><span class="check-tag tag-rev">SR</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">❌ Wrong question notebook — update</span><span class="check-tag tag-must">LOG</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">🪲 Error log — update mistakes + patterns</span><span class="check-tag tag-must">LOG</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📊 Progress tracker — update lecture count</span><span class="check-tag tag-low">TRACK</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card mt16" id="sunday-card" style="display:none">
+    <div class="card-title">☀️ Sunday Checklist — No New Lectures</div>
+    <ul class="checklist" id="sun-list">
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">❓ 50 MCQs — mixed previous topics</span><span class="check-tag tag-mcq">MCQs</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">🔁 Weekly revision — all 5 completed subjects</span><span class="check-tag tag-rev">REVISION</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📅 Spaced repetition — all overdue cards</span><span class="check-tag tag-rev">SR</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">❌ Wrong question notebook — full review</span><span class="check-tag tag-must">LOG</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📝 Weekly review — what worked, what didn't</span><span class="check-tag tag-low">REVIEW</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📆 Plan next week — schedule low-yield subjects</span><span class="check-tag tag-low">PLAN</span></li>
+    </ul>
+  </div>
+
+  <!-- Habit Tracker -->
+  <div class="card mt16">
+    <div class="card-title">🟣 Habit Tracker — This Week</div>
+    <div class="habit-row" style="border-bottom:1px solid var(--border);padding-bottom:8px;margin-bottom:4px">
+      <div class="habit-name" style="color:var(--muted);font-size:11px;font-weight:600">HABIT</div>
+      <div class="habit-days" style="gap:6px">
+        <div class="hday" style="background:none;border:none;font-size:10px;color:var(--muted)">M</div>
+        <div class="hday" style="background:none;border:none;font-size:10px;color:var(--muted)">T</div>
+        <div class="hday" style="background:none;border:none;font-size:10px;color:var(--muted)">W</div>
+        <div class="hday" style="background:none;border:none;font-size:10px;color:var(--muted)">T</div>
+        <div class="hday" style="background:none;border:none;font-size:10px;color:var(--muted)">F</div>
+        <div class="hday" style="background:none;border:none;font-size:10px;color:var(--muted)">S</div>
+        <div class="hday" style="background:none;border:none;font-size:10px;color:var(--muted)">S</div>
+      </div>
+    </div>
+    <div id="habit-grid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════ WEEKLY PAGE ══════════════════ -->
+<div class="page" id="page-weekly">
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">📆 Weekly Schedule Template</div>
+    <table class="tbl">
+      <thead><tr><th>Day</th><th>Focus Subject</th><th>Low-Yield</th><th>MCQs</th><th>Special</th></tr></thead>
+      <tbody>
+        <tr><td><b>Monday</b></td><td><span class="badge badge-prog">3 Medicine</span></td><td>Physiology</td><td>50</td><td>—</td></tr>
+        <tr><td><b>Tuesday</b></td><td><span class="badge badge-prog">3 Medicine</span></td><td>Dermatology</td><td>50</td><td>—</td></tr>
+        <tr><td><b>Wednesday</b></td><td><span class="badge badge-prog">3 Medicine</span></td><td>Orthopedics</td><td>50</td><td>—</td></tr>
+        <tr><td><b>Thursday</b></td><td><span class="badge badge-prog">3 Medicine</span></td><td>Radiology</td><td>50</td><td>—</td></tr>
+        <tr><td><b>Friday</b></td><td><span class="badge badge-prog">3 Medicine</span></td><td>Psychiatry</td><td>50</td><td>—</td></tr>
+        <tr><td><b>Saturday</b></td><td><span class="badge badge-prog">3 Medicine</span></td><td>Ophthalmology</td><td>50</td><td>Weekly recap</td></tr>
+        <tr style="background:rgba(108,99,255,.06)"><td><b>Sunday ☀️</b></td><td colspan="2"><span class="badge badge-done">No new lectures</span></td><td>50</td><td>Weekly review + plan</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">📋 Weekly Review Template</div>
+      <ul class="checklist">
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Total lectures completed this week</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">MCQ accuracy review (target: >70%)</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Spaced repetition — any missed days?</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Error log patterns — recurring mistakes?</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Low-yield subjects covered?</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Study hours vs target (7 hrs/day)</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">Plan next week's low-yield rotation</span></li>
+        <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">GT coming? Revise weak areas</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📊 This Week's Numbers</div>
+      <div class="prog-wrap">
+        <div class="prog-header"><span>Lectures (target 18/wk)</span><span class="prog-pct" id="wk-lec-pct">0%</span></div>
+        <div class="prog-track"><div class="prog-fill fill-purple" id="wk-lec-bar" style="width:0%"></div></div>
+      </div>
+      <div class="prog-wrap">
+        <div class="prog-header"><span>MCQs (target 350/wk)</span><span class="prog-pct" id="wk-mcq-pct">0%</span></div>
+        <div class="prog-track"><div class="prog-fill fill-yellow" id="wk-mcq-bar" style="width:0%"></div></div>
+      </div>
+      <div style="margin-top:14px">
+        <div style="font-size:12px;color:var(--muted);margin-bottom:8px">Enter this week's numbers:</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <input type="number" placeholder="Lectures done" id="wk-lec-input" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:130px" oninput="updateWeekly()">
+          <input type="number" placeholder="MCQs done" id="wk-mcq-input" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:130px" oninput="updateWeekly()">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Monthly Checklist -->
+  <div class="sec-header mt20"><div class="sec-line"></div><div class="sec-label">Monthly Checklist</div><div class="sec-line"></div></div>
+  <div class="card">
+    <div class="card-title">📅 End-of-Month Review + Spaced Repetition Reset</div>
+    <ul class="checklist">
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">✅ Count total Medicine lectures done (target: ~60/month)</span><span class="check-tag tag-med">MED</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📊 Review MCQ accuracy trend — improving?</span><span class="check-tag tag-mcq">MCQ</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">🎯 Grand Test analysis — both GTs of month done?</span><span class="check-tag tag-gt">GT</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">🔁 SR Review — all Day-30 topics revised this month</span><span class="check-tag tag-rev">SR</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📖 Completed subjects revised via Marrow revision videos</span><span class="check-tag tag-rev">REV</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">❌ Wrong notebook — identify top 3 weak topics</span><span class="check-tag tag-must">LOG</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📝 Monthly reflection — burnout signals? energy level?</span><span class="check-tag tag-low">REFLECT</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📆 Plan next month — which low-yield subjects to intensify</span><span class="check-tag tag-low">PLAN</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">🏃 Self-care check — sleep, exercise, breaks maintained?</span><span class="check-tag tag-low">HEALTH</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══════════════════ TRACKER PAGE ══════════════════ -->
+<div class="page" id="page-tracker">
+
+  <!-- Medicine Progress -->
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">💊 Medicine Tracker — Marrow Lectures</div>
+    <div class="stat-row">
+      <div class="stat green"><div class="stat-val" id="med-completed">0</div><div class="stat-label">Completed</div></div>
+      <div class="stat yellow"><div class="stat-val" id="med-remaining">171</div><div class="stat-label">Remaining</div></div>
+      <div class="stat blue"><div class="stat-val" id="med-days">57</div><div class="stat-label">Days to finish</div></div>
+      <div class="stat teal"><div class="stat-val" id="med-pct-val">0%</div><div class="stat-label">Complete</div></div>
+    </div>
+    <div class="prog-wrap">
+      <div class="prog-header"><span>Medicine Progress (171 lectures)</span><span class="prog-pct" id="med-pct">0%</span></div>
+      <div class="prog-track"><div class="prog-fill fill-purple" id="med-bar" style="width:0%"></div></div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:12px;align-items:center">
+      <input type="range" id="med-slider" min="0" max="171" value="0" style="flex:1;accent-color:var(--accent)" oninput="updateMed(this.value)">
+      <span style="font-family:var(--mono);font-size:13px;min-width:30px" id="med-slider-val">0</span>
+    </div>
+  </div>
+
+  <!-- Subject Progress -->
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">📚 Subject Progress Tracker</div>
+    <div id="subject-progress">
+      <!-- Completed subjects -->
+      <div style="margin-bottom:16px">
+        <div class="sec-label" style="margin-bottom:10px;display:block">✅ Completed — Revision Only</div>
+        <div class="prog-wrap"><div class="prog-header"><span>Surgery</span><span class="chip chip-green">Done</span></div><div class="prog-track"><div class="prog-fill fill-green" style="width:100%"></div></div></div>
+        <div class="prog-wrap"><div class="prog-header"><span>Obstetrics & Gynaecology</span><span class="chip chip-green">Done</span></div><div class="prog-track"><div class="prog-fill fill-green" style="width:100%"></div></div></div>
+        <div class="prog-wrap"><div class="prog-header"><span>PSM</span><span class="chip chip-green">Done</span></div><div class="prog-track"><div class="prog-fill fill-green" style="width:100%"></div></div></div>
+        <div class="prog-wrap"><div class="prog-header"><span>ENT</span><span class="chip chip-green">Done</span></div><div class="prog-track"><div class="prog-fill fill-green" style="width:100%"></div></div></div>
+        <div class="prog-wrap"><div class="prog-header"><span>Forensic Medicine</span><span class="chip chip-green">Done</span></div><div class="prog-track"><div class="prog-fill fill-green" style="width:100%"></div></div></div>
+      </div>
+
+      <div style="margin-bottom:16px">
+        <div class="sec-label" style="margin-bottom:10px;display:block">🔄 Active — In Progress</div>
+        <div class="prog-wrap">
+          <div class="prog-header"><span>Medicine</span><span class="prog-pct" id="med-subj-pct">0%</span></div>
+          <div class="prog-track"><div class="prog-fill fill-purple" id="med-subj-bar" style="width:0%"></div></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sec-label" style="margin-bottom:10px;display:block">🕐 Low-Yield — Running Parallel</div>
+        <div class="prog-wrap"><div class="prog-header"><span>Physiology</span><span class="prog-pct">–</span></div><div class="prog-track"><div class="prog-fill fill-teal" style="width:0%" id="phy-bar"></div></div></div>
+        <div class="prog-wrap"><div class="prog-header"><span>Dermatology</span><span class="prog-pct">–</span></div><div class="prog-track"><div class="prog-fill fill-blue" style="width:0%" id="derm-bar"></div></div></div>
+        <div class="prog-wrap"><div class="prog-header"><span>Orthopedics</span><span class="prog-pct">–</span></div><div class="prog-track"><div class="prog-fill fill-yellow" style="width:0%" id="ortho-bar"></div></div></div>
+        <div class="prog-wrap"><div class="prog-header"><span>Radiology</span><span class="prog-pct">–</span></div><div class="prog-track"><div class="prog-fill fill-red" style="width:0%" id="radio-bar"></div></div></div>
+        <div class="prog-wrap"><div class="prog-header"><span>Psychiatry</span><span class="prog-pct">–</span></div><div class="prog-track"><div class="prog-fill fill-purple" style="width:0%" id="psych-bar"></div></div></div>
+        <div class="prog-wrap"><div class="prog-header"><span>Ophthalmology</span><span class="prog-pct">–</span></div><div class="prog-track"><div class="prog-fill fill-green" style="width:0%" id="ophtho-bar"></div></div></div>
+      </div>
+
+      <div style="margin-top:16px">
+        <div class="sec-label" style="margin-bottom:10px;display:block">🔮 Later — Anatomy, Pharma, Patho, Micro</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span class="badge badge-todo">Anatomy</span>
+          <span class="badge badge-todo">Pharmacology</span>
+          <span class="badge badge-todo">Pathology</span>
+          <span class="badge badge-todo">Microbiology</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MCQ Tracker -->
+  <div class="card">
+    <div class="card-title">❓ MCQ Tracker</div>
+    <div class="stat-row">
+      <div class="stat green"><div class="stat-val" id="mcq-done">0</div><div class="stat-label">Done</div></div>
+      <div class="stat yellow"><div class="stat-val" id="mcq-acc">—%</div><div class="stat-label">Accuracy</div></div>
+      <div class="stat blue"><div class="stat-val" id="mcq-wrong">0</div><div class="stat-label">Wrong (Log)</div></div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:4px">
+      <input type="number" placeholder="MCQs today" id="mcq-inp" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:130px">
+      <input type="number" placeholder="Correct" id="mcq-correct" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:130px">
+      <button class="btn btn-primary" onclick="logMCQ()" style="font-size:13px;padding:8px 16px">Log MCQs</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ GT PAGE ══════════════════ -->
+<div class="page" id="page-gt">
+  <div class="intro-banner">
+    <h2>🎯 Grand Test Tracker</h2>
+    <p>Every month: 7th & 17th. Test → Analyse → Create revision tasks → Execute.</p>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">📋 GT Day Checklist</div>
+    <ul class="checklist">
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">✍️ Attempt Grand Test — full exam conditions</span><span class="check-tag tag-gt">GT</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📊 Analyse score — subject-wise breakdown</span><span class="check-tag tag-gt">GT</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">❌ List all wrong answers with explanations</span><span class="check-tag tag-must">LOG</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">🔴 Tag weak subjects / topic clusters</span><span class="check-tag tag-gt">ANALYSE</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📝 Create follow-up revision tasks for next 7 days</span><span class="check-tag tag-rev">SR</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">⚡ Add GT mistakes to Wrong Question Notebook</span><span class="check-tag tag-must">LOG</span></li>
+      <li class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><span class="check-label">📈 Update GT score chart (see below)</span><span class="check-tag tag-gt">TRACK</span></li>
+    </ul>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">📈 GT Score History</div>
+    <table class="tbl" id="gt-table">
+      <thead><tr><th>GT #</th><th>Date</th><th>Score</th><th>Rank/Percentile</th><th>Weakest Subject</th><th>Status</th></tr></thead>
+      <tbody id="gt-tbody">
+        <tr><td>GT 1</td><td>Month 1, 7th</td><td>—</td><td>—</td><td>—</td><td><span class="badge badge-todo">Upcoming</span></td></tr>
+        <tr><td>GT 2</td><td>Month 1, 17th</td><td>—</td><td>—</td><td>—</td><td><span class="badge badge-todo">Upcoming</span></td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+      <input type="text" placeholder="GT date (e.g. July 7)" id="gt-date" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:150px">
+      <input type="text" placeholder="Score" id="gt-score" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:100px">
+      <input type="text" placeholder="Weak subject" id="gt-weak" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:150px">
+      <button class="btn btn-primary" onclick="addGT()" style="font-size:13px;padding:8px 16px">Add GT</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🗒 GT Analysis Template — Post-Test Deep Dive</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div style="background:var(--surface2);border-radius:8px;padding:14px">
+        <div style="font-size:11px;font-weight:600;color:var(--green);margin-bottom:8px">✅ STRENGTHS</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.8">Subjects scored >70%<br>Topics where accuracy was high<br>Time management wins</div>
+      </div>
+      <div style="background:var(--surface2);border-radius:8px;padding:14px">
+        <div style="font-size:11px;font-weight:600;color:var(--red);margin-bottom:8px">❌ WEAK AREAS</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.8">Subjects scored &lt;50%<br>Topics with >3 wrong answers<br>Time-trap questions</div>
+      </div>
+      <div style="background:var(--surface2);border-radius:8px;padding:14px">
+        <div style="font-size:11px;font-weight:600;color:var(--yellow);margin-bottom:8px">🔁 ACTION ITEMS</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.8">Re-read weak topic notes<br>Do 25 targeted MCQs/topic<br>Spaced revision in 1-3-7 days</div>
+      </div>
+      <div style="background:var(--surface2);border-radius:8px;padding:14px">
+        <div style="font-size:11px;font-weight:600;color:var(--blue);margin-bottom:8px">📈 NEXT GT GOAL</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.8">Score improvement target<br>1 subject to focus hard on<br>Accuracy target: 70%+</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ REVISION PAGE ══════════════════ -->
+<div class="page" id="page-revision">
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">🔁 Spaced Repetition — 1-3-7-15-30 System</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+      <span style="padding:6px 14px;border-radius:99px;background:rgba(239,68,68,.15);color:var(--red);font-size:12px;font-weight:600">Day 1 · Same day</span>
+      <span style="padding:6px 14px;border-radius:99px;background:rgba(245,158,11,.15);color:var(--yellow);font-size:12px;font-weight:600">Day 3 · 3 days later</span>
+      <span style="padding:6px 14px;border-radius:99px;background:rgba(108,99,255,.15);color:var(--accent2);font-size:12px;font-weight:600">Day 7 · 1 week later</span>
+      <span style="padding:6px 14px;border-radius:99px;background:rgba(20,184,166,.15);color:var(--teal);font-size:12px;font-weight:600">Day 15 · 2 weeks later</span>
+      <span style="padding:6px 14px;border-radius:99px;background:rgba(34,197,94,.15);color:var(--green);font-size:12px;font-weight:600">Day 30 · 1 month later</span>
+    </div>
+    <div style="background:var(--surface2);border-radius:8px;padding:14px;font-size:13px;color:var(--muted);line-height:1.8;margin-bottom:16px">
+      <b style="color:var(--text)">How to use:</b> Every time you finish a lecture or topic, log it below. The system tells you when to revise it again. On revision days, quickly skim your notes and recall from memory before checking.
+    </div>
+    
+    <!-- SR log -->
+    <div class="flex-between" style="margin-bottom:10px">
+      <div style="font-size:13px;font-weight:600">Due for Revision Today</div>
+      <button class="btn btn-outline" style="font-size:11px;padding:6px 12px" onclick="addSRTopic()">+ Add Topic</button>
+    </div>
+    <div id="sr-list">
+      <div class="sr-row">
+        <div class="sr-dot" style="background:var(--red)"></div>
+        <div class="sr-days">Day 1</div>
+        <div class="sr-topic">Medicine — Chapter: Cardiology basics</div>
+        <div class="sr-due">DUE TODAY</div>
+      </div>
+      <div class="sr-row">
+        <div class="sr-dot" style="background:var(--yellow)"></div>
+        <div class="sr-days">Day 3</div>
+        <div class="sr-topic">Surgery — Revision video batch 1</div>
+        <div class="sr-due">DUE TODAY</div>
+      </div>
+      <div class="sr-row">
+        <div class="sr-dot" style="background:var(--accent2)"></div>
+        <div class="sr-days">Day 7</div>
+        <div class="sr-topic">OBG — Revision video batch 2</div>
+        <div class="sr-due">In 3 days</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">❌ Wrong Question Notebook</div>
+    <table class="tbl">
+      <thead><tr><th>Date</th><th>Subject</th><th>Topic</th><th>Mistake Type</th><th>SR Due</th></tr></thead>
+      <tbody id="wq-tbody">
+        <tr><td colspan="5" style="text-align:center;color:var(--muted);padding:20px">No entries yet — add from daily log</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+      <input type="text" placeholder="Subject" id="wq-sub" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:110px">
+      <input type="text" placeholder="Topic" id="wq-topic" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:140px">
+      <input type="text" placeholder="Mistake type" id="wq-mistake" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-size:13px;width:130px">
+      <button class="btn btn-primary" onclick="addWQ()" style="font-size:13px;padding:8px 16px">Log</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ NOTION PASTE PAGE ══════════════════ -->
+<div class="page" id="page-notion">
+  <div class="intro-banner">
+    <h2>📋 Copy-Paste Into Notion</h2>
+    <p>Below are ready-to-paste checklists for Notion. Each block can be pasted directly into any Notion page.</p>
+    <div class="quote">💡 To paste in Notion: Open any page → Click empty area → Paste (Ctrl+V / Cmd+V). Notion auto-formats checkboxes and bullet points.</div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">☑ WEEKDAY DAILY CHECKLIST (Mon–Sat)</div>
+    <div class="notion-box" id="notion-weekday"></div>
+    <button class="copy-btn" onclick="copyNotion('notion-weekday')">📋 Copy to Clipboard</button>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">☀️ SUNDAY CHECKLIST</div>
+    <div class="notion-box" id="notion-sunday"></div>
+    <button class="copy-btn" onclick="copyNotion('notion-sunday')">📋 Copy to Clipboard</button>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">📅 END-OF-MONTH CHECKLIST + SPACED REPETITION</div>
+    <div class="notion-box" id="notion-monthly"></div>
+    <button class="copy-btn" onclick="copyNotion('notion-monthly')">📋 Copy to Clipboard</button>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">🎯 GT DAY CHECKLIST</div>
+    <div class="notion-box" id="notion-gt"></div>
+    <button class="copy-btn" onclick="copyNotion('notion-gt')">📋 Copy to Clipboard</button>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-title">🔁 SPACED REPETITION TRACKER TEMPLATE</div>
+    <div class="notion-box" id="notion-sr"></div>
+    <button class="copy-btn" onclick="copyNotion('notion-sr')">📋 Copy to Clipboard</button>
+  </div>
+
+  <!-- Publish guide -->
+  <div class="card" style="border-color:rgba(108,99,255,.4)">
+    <div class="card-title" style="color:var(--accent2)">🌐 How to Publish This as a Website (iPad & Computer)</div>
+    <div style="font-size:13px;line-height:2;color:var(--muted)">
+      <div style="margin-bottom:16px">
+        <div style="color:var(--text);font-weight:600;margin-bottom:8px">Option 1: Publish via Notion (Easiest — 2 minutes)</div>
+        1. Open Notion on your iPad or computer<br>
+        2. Create a new page → paste your checklists in<br>
+        3. Click the <b style="color:var(--text)">Share</b> button (top right)<br>
+        4. Toggle <b style="color:var(--text)">"Share to web"</b> ON<br>
+        5. Click <b style="color:var(--text)">"Copy link"</b> → that's your website URL!<br>
+        6. Open that link on any browser — it works on iPad, phone, and computer<br>
+        <br>
+        <span style="color:var(--green)">✅ Free, no coding needed, updates live as you edit</span>
+      </div>
+      <div style="margin-bottom:16px">
+        <div style="color:var(--text);font-weight:600;margin-bottom:8px">Option 2: Host This HTML File Free (GitHub Pages)</div>
+        1. Go to <b style="color:var(--text)">github.com</b> → Create free account<br>
+        2. Click <b style="color:var(--text)">"New repository"</b> → Name it <code style="color:var(--accent2)">neet-dashboard</code><br>
+        3. Upload this HTML file as <code style="color:var(--accent2)">index.html</code><br>
+        4. Go to Settings → Pages → Source: main branch → Save<br>
+        5. Your site will be live at <code style="color:var(--accent2)">yourusername.github.io/neet-dashboard</code><br>
+        <br>
+        <span style="color:var(--green)">✅ Free forever, works on all devices, shareable link</span>
+      </div>
+      <div>
+        <div style="color:var(--text);font-weight:600;margin-bottom:8px">Option 3: Save to iPad Home Screen (App-like Experience)</div>
+        1. Download this HTML file to your iPad<br>
+        2. Open it in <b style="color:var(--text)">Safari</b><br>
+        3. Tap the <b style="color:var(--text)">Share icon</b> → <b style="color:var(--text)">"Add to Home Screen"</b><br>
+        4. It opens like an app with no browser bar!<br>
+        <br>
+        <span style="color:var(--green)">✅ Works offline, feels like a native app</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── DATE ──
+const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const now = new Date();
+document.getElementById('live-date').textContent = now.toLocaleDateString('en-IN', {weekday:'short',day:'numeric',month:'short'});
+
+// ── PAGE NAV ──
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  event.target.classList.add('active');
+  if(id==='notion') populateNotion();
+}
+
+// ── CHECKLIST TOGGLE ──
+function toggleCheck(el){
+  el.classList.toggle('done');
+  updateTaskCount();
+}
+function updateTaskCount(){
+  const total = document.querySelectorAll('#check-list .check-item').length;
+  const done = document.querySelectorAll('#check-list .check-item.done').length;
+  document.getElementById('tasks-done').textContent = done+'/'+total;
+}
+function resetChecklist(){
+  document.querySelectorAll('.check-item').forEach(el=>el.classList.remove('done'));
+  updateTaskCount();
+}
+
+// ── TIMER ──
+let timerInterval, timerSeconds = 25*60, timerRunning = false;
+function formatTime(s){ return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0'); }
+function updateTimerDisplay(){ document.getElementById('timer').textContent = formatTime(timerSeconds); }
+function setTimer(min){ clearInterval(timerInterval); timerRunning=false; timerSeconds=min*60; updateTimerDisplay(); }
+function startTimer(){
+  if(timerRunning) return;
+  timerRunning=true;
+  timerInterval=setInterval(()=>{
+    if(timerSeconds<=0){ clearInterval(timerInterval); timerRunning=false; alert('⏰ Session complete!'); return; }
+    timerSeconds--; updateTimerDisplay();
+  },1000);
+}
+function pauseTimer(){ clearInterval(timerInterval); timerRunning=false; }
+function resetTimer(){ pauseTimer(); timerSeconds=25*60; updateTimerDisplay(); }
+
+// ── STREAK GRID ──
+const streakData = JSON.parse(localStorage.getItem('streak') || '{}');
+function buildStreakGrid(){
+  const grid = document.getElementById('streak-grid');
+  grid.innerHTML='';
+  const today = new Date();
+  for(let i=29;i>=0;i--){
+    const d = new Date(today); d.setDate(today.getDate()-i);
+    const key = d.toISOString().slice(0,10);
+    const div = document.createElement('div');
+    div.className = 'streak-day' + (i===0?' today':streakData[key]?' done':'');
+    div.title = key;
+    div.onclick=()=>{ streakData[key]=!streakData[key]; localStorage.setItem('streak',JSON.stringify(streakData)); buildStreakGrid(); updateStreak(); };
+    grid.appendChild(div);
+  }
+}
+function updateStreak(){
+  let streak=0; const today=new Date();
+  for(let i=0;i<365;i++){
+    const d=new Date(today); d.setDate(today.getDate()-i);
+    if(streakData[d.toISOString().slice(0,10)]) streak++; else break;
+  }
+  document.getElementById('streak-count').textContent=streak;
+}
+buildStreakGrid(); updateStreak();
+
+// ── HABIT TRACKER ──
+const habits = ['3 Med Lectures','50 MCQs','Spaced Rev','Wrong Notebook','Error Log','7hr Study'];
+const habitData = JSON.parse(localStorage.getItem('habits')||'{}');
+function buildHabits(){
+  const container = document.getElementById('habit-grid');
+  container.innerHTML='';
+  habits.forEach(h=>{
+    const row = document.createElement('div'); row.className='habit-row';
+    const name = document.createElement('div'); name.className='habit-name'; name.textContent=h;
+    const days = document.createElement('div'); days.className='habit-days';
+    for(let d=0;d<7;d++){
+      const key=h+'_'+d;
+      const cell = document.createElement('div'); cell.className='hday'+(habitData[key]?' done':'');
+      cell.textContent=habitData[key]?'✓':'';
+      cell.onclick=()=>{ habitData[key]=!habitData[key]; localStorage.setItem('habits',JSON.stringify(habitData)); buildHabits(); };
+      days.appendChild(cell);
+    }
+    row.appendChild(name); row.appendChild(days); container.appendChild(row);
+  });
+}
+buildHabits();
+
+// ── MEDICINE TRACKER ──
+let medTotal = parseInt(localStorage.getItem('medDone')||'0');
+function updateMed(val){
+  medTotal=parseInt(val);
+  localStorage.setItem('medDone',medTotal);
+  document.getElementById('med-slider-val').textContent=medTotal;
+  document.getElementById('med-slider').value=medTotal;
+  const rem=171-medTotal, pct=Math.round(medTotal/171*100);
+  document.getElementById('med-completed').textContent=medTotal;
+  document.getElementById('med-remaining').textContent=rem;
+  document.getElementById('med-days').textContent=Math.ceil(rem/3);
+  document.getElementById('med-pct-val').textContent=pct+'%';
+  document.getElementById('med-pct').textContent=pct+'%';
+  document.getElementById('med-bar').style.width=pct+'%';
+  document.getElementById('med-subj-pct').textContent=pct+'%';
+  document.getElementById('med-subj-bar').style.width=pct+'%';
+  document.getElementById('med-done').textContent=medTotal;
+  document.getElementById('med-remaining').textContent=rem;
+}
+updateMed(medTotal);
+
+// ── MCQ TRACKER ──
+let mcqTotal=parseInt(localStorage.getItem('mcqTotal')||'0');
+let mcqCorrectTotal=parseInt(localStorage.getItem('mcqCorrect')||'0');
+document.getElementById('mcq-total').textContent=mcqTotal;
+function logMCQ(){
+  const done=parseInt(document.getElementById('mcq-inp').value||0);
+  const correct=parseInt(document.getElementById('mcq-correct').value||0);
+  mcqTotal+=done; mcqCorrectTotal+=correct;
+  localStorage.setItem('mcqTotal',mcqTotal); localStorage.setItem('mcqCorrect',mcqCorrectTotal);
+  const acc=mcqTotal>0?Math.round(mcqCorrectTotal/mcqTotal*100):0;
+  document.getElementById('mcq-done').textContent=mcqTotal;
+  document.getElementById('mcq-total').textContent=mcqTotal;
+  document.getElementById('mcq-acc').textContent=acc+'%';
+  document.getElementById('mcq-wrong').textContent=mcqTotal-mcqCorrectTotal;
+  document.getElementById('mcq-inp').value=''; document.getElementById('mcq-correct').value='';
+}
+
+// ── WEEKLY ──
+function updateWeekly(){
+  const lec=parseInt(document.getElementById('wk-lec-input').value||0);
+  const mcq=parseInt(document.getElementById('wk-mcq-input').value||0);
+  const lecPct=Math.min(100,Math.round(lec/18*100));
+  const mcqPct=Math.min(100,Math.round(mcq/350*100));
+  document.getElementById('wk-lec-pct').textContent=lecPct+'%';
+  document.getElementById('wk-lec-bar').style.width=lecPct+'%';
+  document.getElementById('wk-mcq-pct').textContent=mcqPct+'%';
+  document.getElementById('wk-mcq-bar').style.width=mcqPct+'%';
+}
+
+// ── GT TRACKER ──
+let gtCount=2;
+function addGT(){
+  const date=document.getElementById('gt-date').value;
+  const score=document.getElementById('gt-score').value;
+  const weak=document.getElementById('gt-weak').value;
+  if(!date||!score) return;
+  gtCount++;
+  const tbody=document.getElementById('gt-tbody');
+  const tr=document.createElement('tr');
+  tr.innerHTML=`<td>GT ${gtCount}</td><td>${date}</td><td style="color:var(--accent2);font-weight:700">${score}</td><td>—</td><td>${weak||'—'}</td><td><span class="badge badge-done">Done</span></td>`;
+  tbody.appendChild(tr);
+  document.getElementById('gt-date').value=''; document.getElementById('gt-score').value=''; document.getElementById('gt-weak').value='';
+}
+
+// ── WRONG NOTEBOOK ──
+function addWQ(){
+  const sub=document.getElementById('wq-sub').value;
+  const topic=document.getElementById('wq-topic').value;
+  const mistake=document.getElementById('wq-mistake').value;
+  if(!sub||!topic) return;
+  const tbody=document.getElementById('wq-tbody');
+  if(tbody.querySelector('td[colspan]')) tbody.innerHTML='';
+  const tr=document.createElement('tr');
+  const today=new Date().toLocaleDateString('en-IN');
+  tr.innerHTML=`<td>${today}</td><td>${sub}</td><td>${topic}</td><td>${mistake||'Conceptual'}</td><td style="color:var(--yellow)">+1 day</td>`;
+  tbody.appendChild(tr);
+  document.getElementById('wq-sub').value=''; document.getElementById('wq-topic').value=''; document.getElementById('wq-mistake').value='';
+}
+
+// ── SR ADD ──
+function addSRTopic(){
+  const topic=prompt('Enter topic name:'); if(!topic) return;
+  const list=document.getElementById('sr-list');
+  const row=document.createElement('div'); row.className='sr-row';
+  row.innerHTML=`<div class="sr-dot" style="background:var(--red)"></div><div class="sr-days">Day 1</div><div class="sr-topic">${topic}</div><div class="sr-due">DUE TODAY</div>`;
+  list.prepend(row);
+}
+
+// ── NOTION CONTENT ──
+function populateNotion(){
+  document.getElementById('notion-weekday').textContent = `# 📅 Daily Checklist — Weekday (Mon–Sat)
+
+## 🕗 Morning Block
+☐ Review today's plan (5 min)
+☐ Open Marrow — Medicine Lecture 1
+☐ 📖 Watch + take notes — Lecture 1
+☐ 🔁 Immediate revision after Lecture 1 (10 min recall)
+
+## 🕙 Mid-Morning Block
+☐ 📖 Watch + take notes — Lecture 2
+☐ 🔁 Immediate revision after Lecture 2 (10 min recall)
+☐ 📖 Watch + take notes — Lecture 3
+☐ 🔁 Immediate revision after Lecture 3 (10 min recall)
+
+## 🕐 Afternoon Block
+☐ 📚 Low-yield subject slot (rotate daily: Physio / Derm / Ortho / Radio / Psych / Ophtho)
+☐ 📅 Spaced repetition — check due topics (1/3/7/15/30 system)
+☐ Revise due SR topics
+
+## 🕓 Evening Block
+☐ ❓ 50 MCQs — Marrow (subject-wise or mixed)
+☐ Review all wrong answers with explanations
+☐ ❌ Update Wrong Question Notebook
+☐ 🪲 Update Error Log — note mistake pattern
+
+## 🕗 Night Block
+☐ 📊 Update Medicine lecture count
+☐ Quick recap of all 3 lectures (mental recall)
+☐ Tick habit tracker for today
+☐ Set tomorrow's plan (2 min)
+
+---
+Medicine Lectures Done Today: __/3
+MCQ Score: __/50 (__%)
+SR Topics Revised: ✅ / ❌
+Study Hours Today: __ hrs`;
+
+  document.getElementById('notion-sunday').textContent = `# ☀️ Sunday Checklist — Rest + Revision Day
+> No new lectures today. Focus on consolidation.
+
+## Morning
+☐ ❓ 50 MCQs — mixed subjects (no time pressure)
+☐ Review all wrong answers carefully
+
+## Afternoon
+☐ 🔁 Weekly revision — Surgery (Marrow revision video)
+☐ 🔁 Weekly revision — OBG (Marrow revision video)
+☐ 🔁 Weekly revision — PSM (Marrow revision video)
+☐ 🔁 Weekly revision — ENT (Marrow revision video)
+☐ 🔁 Weekly revision — Forensic Medicine (Marrow revision video)
+☐ 📅 Spaced repetition — all overdue cards cleared
+
+## Evening
+☐ ❌ Wrong Question Notebook — full weekly review
+☐ Identify top 3 weak topics of the week
+☐ 📝 Weekly review: What worked? What didn't?
+☐ 📆 Plan next week — which low-yield subject each day?
+
+## Night
+☐ Update all trackers
+☐ Set Monday's checklist ready
+☐ Rest well — you earned it 🎯
+
+---
+MCQ Score: __/50 (__%)
+This week's Medicine lectures done: __/18
+Weekly review complete: ✅ / ❌`;
+
+  document.getElementById('notion-monthly').textContent = `# 📅 End-of-Month Review + Spaced Repetition Reset
+
+## 📊 Numbers Review
+☐ Total Medicine lectures this month: __ (target: ~60)
+☐ Total MCQs this month: __ (target: ~1500)
+☐ Average MCQ accuracy: __%
+☐ Grand Tests done: __ (target: 2 — on 7th and 17th)
+☐ Study streak days: __/30
+
+## 🔁 Spaced Repetition — Month-End Check
+☐ All Day-1 topics covered on time? ✅ / ❌
+☐ All Day-3 topics covered? ✅ / ❌
+☐ All Day-7 topics covered? ✅ / ❌
+☐ All Day-15 topics covered? ✅ / ❌
+☐ All Day-30 topics — mark as "Consolidated" ✅
+
+## 📖 Subject Revision Status
+☐ Surgery — Marrow revision done this month? ✅ / ❌
+☐ OBG — Marrow revision done? ✅ / ❌
+☐ PSM — Marrow revision done? ✅ / ❌
+☐ ENT — Marrow revision done? ✅ / ❌
+☐ Forensic Medicine — Marrow revision done? ✅ / ❌
+
+## 🎯 Grand Test Analysis
+☐ GT 1 (7th) — analysed? ✅ / ❌
+☐ GT 2 (17th) — analysed? ✅ / ❌
+☐ GT weak subjects identified and revision tasks created? ✅ / ❌
+
+## ❌ Error Analysis
+☐ Wrong Notebook reviewed — top 3 weak topics: 1.__ 2.__ 3.__
+☐ Recurring mistake patterns: __
+
+## 📝 Monthly Reflection
+☐ Energy/burnout level this month (1–10): __
+☐ What worked best: __
+☐ What to improve next month: __
+☐ Sleep consistency: ✅ / ❌
+☐ Exercise maintained: ✅ / ❌
+
+## 📆 Next Month Plan
+☐ Medicine lectures plan (target 60): __
+☐ Low-yield subjects rotation planned: __
+☐ GT dates marked: 7th ✅ / 17th ✅
+☐ Any subject to intensify: __`;
+
+  document.getElementById('notion-gt').textContent = `# 🎯 Grand Test Day Checklist
+> Date: ___  |  GT Number: ___
+
+## Before the Test
+☐ Light breakfast, water ready
+☐ Exam environment set — no distractions
+☐ Timer set for full test duration
+
+## During the Test
+☐ Read questions carefully
+☐ Attempt all — no blank answers
+☐ Flag doubtful questions for review
+
+## After the Test (Same Day — Non-Negotiable)
+☐ ✍️ Record final score: __/300
+☐ 📊 Subject-wise breakdown:
+   Medicine: __  Surgery: __  PSM: __  OBG: __  ENT: __  Forensic: __
+☐ ❌ List all wrong answers (min top 20 mistakes)
+☐ 🔴 Tag weak subjects (scored <50%)
+☐ 📝 Create follow-up revision tasks for next 7 days
+
+## Action Tasks Created from GT
+☐ Topic 1: __ → Revise by Day +1
+☐ Topic 2: __ → Revise by Day +3
+☐ Topic 3: __ → Revise by Day +7
+☐ Topic 4: __ → Revise by Day +15
+
+☐ Add all GT mistakes to Wrong Question Notebook ✅`;
+
+  document.getElementById('notion-sr').textContent = `# 🔁 Spaced Repetition Tracker — 1-3-7-15-30 System
+> Paste this into your Notion calendar for every new lecture batch
+
+## How it Works
+When you finish a topic or lecture batch — note the date.
+Then revise on: Day+1, Day+3, Day+7, Day+15, Day+30.
+
+---
+
+## Template (copy for each new topic)
+
+**Topic:** ___________________________
+**Date learned:** ____________________
+
+☐ Revise Day +1  → Date: _______  Done: ✅/❌
+☐ Revise Day +3  → Date: _______  Done: ✅/❌
+☐ Revise Day +7  → Date: _______  Done: ✅/❌
+☐ Revise Day +15 → Date: _______  Done: ✅/❌
+☐ Revise Day +30 → Date: _______  Done: ✅/❌ → Consolidated ✅
+
+---
+
+## This Week's SR Schedule
+
+| Topic | Day Learned | Next Due | Status |
+|-------|-------------|----------|--------|
+| Medicine — Cardiology | _______ | Day +1 | ☐ |
+| Medicine — Respiratory | _______ | Day +3 | ☐ |
+| Surgery Revision Batch | _______ | Day +7 | ☐ |
+| OBG Revision Batch | _______ | Day +15 | ☐ |
+
+---
+💡 Tip: Add SR due dates to your Notion Calendar view for automatic reminders.`;
+}
+
+// ── COPY ──
+function copyNotion(id){
+  const text=document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn=event.target; btn.textContent='✅ Copied!';
+    setTimeout(()=>btn.textContent='📋 Copy to Clipboard',2000);
+  });
+}
+
+// Auto-detect Sunday
+if(now.getDay()===0){
+  document.getElementById('sunday-card').style.display='block';
+  document.getElementById('day-type').textContent='Sunday';
+  document.getElementById('day-type').className='chip chip-yellow';
+}
+</script>
+</body>
+</html>
